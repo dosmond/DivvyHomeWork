@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import AppRouter from './routes'
 import { ApolloProvider } from 'react-apollo'
 import { client } from './network/apollo-client'
+import 'antd/dist/antd.css'
 
 ReactDOM.render(
   (

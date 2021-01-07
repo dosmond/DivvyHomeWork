@@ -2,52 +2,41 @@ import React from 'react'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import { css } from '@emotion/core'
 import { Home } from './home'
+import { Menu } from 'antd'
+import { Transactions } from './transaction-page/transactions-page'
 
 function AppRouter () {
   return (
-    <Router>
-      <div css={layoutStyle}>
-        <nav css={navStyle}>
-          <ul >
-            <li>
-              <Link to='/'>Home</Link>
-            </li>
-            <li>
-              <Link to='/another'>Another route</Link>
-            </li>
-          </ul>
-        </nav>
+    <div css={container}>
+      <Router>
+        <Menu css={menuStyle} mode='horizontal'>
+          <Menu.Item key='home'>
+            <Link to='/'>Home</Link>
+          </Menu.Item>
+          <Menu.Item key='transactions'>
+            <Link to='/transactions'>Transactions</Link>
+          </Menu.Item>
+        </Menu>
         <div className='main-content' css={contentStyle}>
           <Route component={Home} exact path='/' />
-          <Route component={() => (<div>Content for /another route</div>)} exact path='/another' />
+          <Route component={Transactions} exact path='/transactions' />
         </div>
-      </div>
-    </Router>
+      </Router>
+    </div>
   )
 }
 
 export default AppRouter
 
-const layoutStyle = css`
-    display: grid;
-    grid-row-gap: 24px;
-    padding: 8px;
-`
-
-const navStyle = css`
-  grid-row: 1;
-
-  & > ul {
-      display: flex;
-      flex-direction: row;
-      list-style-type: none;
-  }
-  
-  & > ul > li:not(:first-child) {
-    margin-left: 16px;
-  }
-`
-
 const contentStyle = css`
   grid-row: 2;
+`
+
+const menuStyle = css`
+  height: 50px;
+  text-align: center;
+`
+const container = css`
+  margin-left: 15%;
+  margin-right: 15%;
 `

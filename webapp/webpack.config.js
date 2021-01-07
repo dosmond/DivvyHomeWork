@@ -51,11 +51,16 @@ const rules = [
   eslintConfig,
   imageUrlConfig,
   {
+    test: /\.css$/i,
+    use: ["style-loader", "css-loader"],
+  },
+  {
     test: /\.mjs$/,
     include: NODE_MODULES_DIR_REGEX,
     type: 'javascript/auto'
   },
-  graphQlConfig
+  graphQlConfig,
+
 ]
 
 const config = {
