@@ -3,7 +3,8 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack -d",
-    "start": "webpack-dev-server -d --hot"
+    "start": "webpack-dev-server -d --hot",
+    "cypress": "cypress open"
   },
   "jest": {
     "setupFiles": [
@@ -94,6 +95,7 @@
     "babel-plugin-transform-require-context": "0.1.1",
     "babel-polyfill": "6.26.0",
     "clean-webpack-plugin": "3.0.0",
+    "cypress": "4.12.1",
     "eslint": "5.16.0",
     "eslint-config-airbnb": "17.1.0",
     "eslint-config-divvy": "1.1.0",
