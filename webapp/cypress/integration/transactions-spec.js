@@ -29,15 +29,17 @@ describe('Transactions page', () => {
     })
 
     it.only('Should be able to add a transacton', () => {
+      let random = Math.random().toString(36).substring(7)
       cy.get('#amount').clear().type('5.99')
       cy.get('#merchant').clear().type('Walmart{enter}')
       cy.get('#user').clear().type('Daniel Osmond{enter}')
-      cy.get('#description').clear().type('test')
+      cy.get('#description').clear().type(random)
       cy.get('#radio-debit').click()
 
       cy.get('#add-transaction-submit').click()
 
       cy.wait(1000)
+      cy.contains(random)
     })
   })
 })
