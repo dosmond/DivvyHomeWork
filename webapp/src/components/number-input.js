@@ -11,25 +11,23 @@ NumInput.propTypes = {
   onChange: PropTypes.func
 }
 
-function NumInput ({ placeholder, id, value, onChange }) {
+function NumInput ({ placeholder, id, value = '', onChange }) {
   const [curValue, setValue] = useState('')
-  value = curValue
 
   const validate = (e) => {
     let curVal = removeCommas(e.target.value)
 
     // If the new value doesn't match our pattern, return to prevValue
-    if (!isOnlyNumbers(curVal, true) || !isGreaterThanZero(curVal, true)) {
+    if (!isValidNumber(curVal, true)) {
       setValue(prevValue)
     } else {
       let newValue = addCommas(e.target.value)
       setValue(newValue)
       prevValue = newValue
+      value = newValue
     }
 
-    if (onChange) {
-      onChange(value)
-    }
+    onChange(value)
   }
 
   const getCurValue = () => {
@@ -43,32 +41,21 @@ function NumInput ({ placeholder, id, value, onChange }) {
 export default NumInput
 
 /**
- * Returns whether or not only numbers exist with up to two decimal places.
+ * Returns whether or not the number is valid.
  * @param text
  * @param allowBlank - Allow an empty string
  * @returns {boolean}
  */
-function isOnlyNumbers (text, allowBlank) {
+function isValidNumber (text, allowBlank) {
   if (text === '' || text === undefined) {
     return !!allowBlank
   }
-
-  var regex = /(^[0](\.[0-9]{0,2})?$)|(^[1-9][0-9]{0,10}?(\.[0-9]{0,2})?$)/
-  return !!text.match(regex)
-}
-
-/**
- * Determines if a number is greater than zero
- * @param number
- * @param allowBlank - Allow an empty string
- * @returns {boolean}
- */
-function isGreaterThanZero (number, allowBlank) {
-  if (number === '' || number === undefined) {
-    return !!allowBlank
+  if (text === '-') {
+    return true
   }
 
-  return number >= 0
+  var regex = /(^[-]?[0](\.[0-9]{0,2})?$)|(^[-]?[1-9][0-9]{0,10}?(\.[0-9]{0,2})?$)/
+  return !!text.match(regex)
 }
 
 /**

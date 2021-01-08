@@ -18,6 +18,8 @@ function AddTransaction ({ refetch }) {
   const [createTransaction] = useMutation(CREATE_TRANSACTION)
   const { loading, error, data } = useQuery(GET_MERCHANTS_AND_USERS)
 
+  var isDisabled = false
+
   if (loading) return 'Loading...'
   if (error) return `Error! ${error.message}`
 
@@ -32,7 +34,12 @@ function AddTransaction ({ refetch }) {
 
   const handleSubmit = () => {
     var addAmount = form.getFieldValue('amount')
+
+    isDisabled = true
+
     if (addAmount === undefined) {
+      handleClear()
+      isDisabled = false
       return
     } else {
       addAmount = parseFloat(removeCommas(addAmount))
@@ -44,6 +51,8 @@ function AddTransaction ({ refetch }) {
     var addUser = form.getFieldValue('user')
 
     if (addDescription === undefined || addMerchant === undefined || addUser === undefined || addType === undefined) {
+      handleClear()
+      isDisabled = false
       return
     }
 
@@ -61,17 +70,17 @@ function AddTransaction ({ refetch }) {
       }
     ).then(() => {
       refetch()
+      handleClear()
+      isDisabled = false
     })
   }
-
-  let returnValue = ''
 
   return (
     <Space css={addTransactionStyle} direction='vertical'>
       <Card title='Add Transaction'>
         <Form form={form}>
-          <Form.Item name='amount' rules={[{ required: true, message: 'Please input an amount' }]} value={returnValue}>
-            <NumInput id='amount' placeholder='Amount' value={returnValue} />
+          <Form.Item name='amount' rules={[{ required: true, message: 'Please input an amount' }]}>
+            <NumInput id='amount' placeholder='Amount' />
           </Form.Item>
           <Form.Item name='merchant' rules={[{ required: true, message: 'Please select a merchant' }]}>
             <Select
@@ -84,6 +93,7 @@ function AddTransaction ({ refetch }) {
           </Form.Item>
           <Form.Item name='user' rules={[{ required: true, message: 'Please select a user' }]}>
             <Select
+              id='user'
               optionFilterProp='children'
               placeholder='Select a user'
               showSearch
@@ -103,10 +113,10 @@ function AddTransaction ({ refetch }) {
             </Radio.Group>
           </Form.Item>
           <Form.Item>
-            <Button css={submitButtonStyle} htmlType='submit' id='add-transaction-submit' onClick={handleSubmit} type='primary'>
+            <Button css={submitButtonStyle} disabled={isDisabled} htmlType='submit' id='add-transaction-submit' onClick={handleSubmit} type='primary'>
                     Submit
             </Button>
-            <Button danger id='add-transaction-cancel' onClick={handleClear}>
+            <Button danger disabled={isDisabled} id='add-transaction-cancel' onClick={handleClear}>
                     Clear
             </Button>
           </Form.Item>

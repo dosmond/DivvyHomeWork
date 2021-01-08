@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Table, Space, Checkbox } from 'antd'
+import { css } from '@emotion/core'
+import { Table, Space } from 'antd'
+import { EditTwoTone, DeleteTwoTone } from '@ant-design/icons'
 
 const { Column } = Table
 
@@ -11,34 +13,23 @@ function TransactionTable ({ transactions }) {
   })
 
   return (
-    <Table dataSource={transactions}>
-      <Column dataIndex='fixedAmount' key='id' title='Amount' />
-      <Column dataIndex='description' key='id' title='Description' />
-      <Column dataIndex='merchantName' key='id' title='Merchant'>test</Column>
+    <Table dataSource={transactions} rowKey={record => record.id}>
+      <Column dataIndex='description' key='description' title='Description' />
+      <Column dataIndex='merchantName' key='merchant' title='Merchant' />
       <Column
-        key='id'
-        render={(text, record) => {
-          return (
-            <Checkbox checked={text.credit} readonly />
-          )
-        }}
-        title='Credit'
+        key='type'
+        render={(text, record) => (
+          <label>{record.credit ? 'Credit' : 'Debit'}</label>
+        )}
+        title='Type'
       />
+      <Column dataIndex='fixedAmount' key='amount' title='Amount' />
       <Column
-        key='id'
-        render={(text, record) => {
-          return (
-            <Checkbox checked={text.debit} readonly />
-          )
-        }}
-        title='Debit'
-      />
-      <Column
-        key='id'
+        key='action'
         render={(text, record) => (
           <Space size='middle'>
-            <a href='/'>Edit</a>
-            <a href='/'>Delete</a>
+            <button css={actionButtonStyle}><EditTwoTone /></button>
+            <button css={actionButtonStyle}><DeleteTwoTone twoToneColor='#eb2f96' /></button>
           </Space>
         )}
         title='Action'
@@ -52,3 +43,13 @@ TransactionTable.propTypes = {
 }
 
 export default TransactionTable
+
+const actionButtonStyle = css`
+  background-color: transparent;
+  border: none;
+  outline: none;
+  
+  &:hover {
+      cursor: pointer;
+  }
+`
