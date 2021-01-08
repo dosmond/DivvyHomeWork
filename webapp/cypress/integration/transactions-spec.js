@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 describe('Transactions page', () => {
   beforeEach(() => {
     cy.visit('localhost:3000/transactions')
