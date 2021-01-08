@@ -5,10 +5,11 @@ import PropTypes from 'prop-types'
 var prevValue = ''
 
 NumInput.propTypes = {
-  placeholder: PropTypes.string
+  placeholder: PropTypes.string,
+  id: PropTypes.string
 }
 
-function NumInput ({ placeholder }) {
+function NumInput ({ placeholder, id }) {
   const [value, setValue] = useState('')
 
   const validate = (e) => {
@@ -28,7 +29,7 @@ function NumInput ({ placeholder }) {
     prevValue = value
   }
 
-  return <Input addonBefore='$' onChange={validate} onFocus={getCurValue} placeholder={placeholder} value={value} />
+  return <Input addonBefore='$' id={id} onChange={validate} onFocus={getCurValue} placeholder={placeholder} value={value} />
 }
 
 export default NumInput

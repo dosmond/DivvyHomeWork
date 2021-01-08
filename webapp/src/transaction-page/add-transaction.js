@@ -21,27 +21,27 @@ function AddTransaction () {
       <Card title='Add Transaction'>
         <Form form={form}>
           <Form.Item name='amount'>
-            <NumInput placeholder='Amount' />
+            <NumInput id='amount' placeholder='Amount' />
           </Form.Item>
           <Form.Item name='merchant'>
-            <Input placeholder='Merchant' />
+            <Input id='merchant' placeholder='Merchant' />
           </Form.Item>
           <Form.Item name='description'>
-            <Input placeholder='Description' />
+            <Input id='description' placeholder='Description' />
           </Form.Item>
           <Form.Item name='type'>
             <Radio.Group onChange={onRadioChange} value={radioValue}>
-              <Radio checked value='Credit'>
+              <Radio id='radio-credit' value='Credit'>
                       Credit
               </Radio>
-              <Radio value='Debit'>Debit</Radio>
+              <Radio id='radio-debit' value='Debit'>Debit</Radio>
             </Radio.Group>
           </Form.Item>
           <Form.Item>
-            <Button css={submitButtonStyle} type='primary'>
+            <Button css={submitButtonStyle} id='add-transaction-submit' type='primary'>
                     Submit
             </Button>
-            <Button danger onClick={handleClear}>
+            <Button danger id='add-transaction-cancel' onClick={handleClear}>
                     Clear
             </Button>
           </Form.Item>
