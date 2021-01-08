@@ -1,7 +1,8 @@
-import { gql } from 'apollo-client'
+import gql from 'graphql-tag'
 
 export const GET_TRANSACTIONS = gql`
-    query transactions {
+    {
+      transactions {
         id
         amount
         credit
@@ -18,5 +19,15 @@ export const GET_TRANSACTIONS = gql`
           firstName
           lastName
         }
+      }
     }
+`
+
+export const GET_MERCHANT = gql`
+  {
+    merchants {
+        id
+        name
+    }
+  }
 `

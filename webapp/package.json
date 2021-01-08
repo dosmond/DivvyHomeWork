@@ -3,7 +3,7 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack -d",
-    "start": "webpack-dev-server -d --hot --fix",
+    "start": "webpack-dev-server -d --hot",
     "cypress": "cypress open"
   },
   "jest": {
@@ -37,11 +37,12 @@
     }
   },
   "dependencies": {
+    "@apollo/react-hooks": "^4.0.0",
     "@emotion/core": "10.0.10",
     "@emotion/styled": "10.0.12",
     "antd": "^4.10.0",
     "apollo-cache-inmemory": "1.6.2",
-    "apollo-client": "2.6.2",
+    "apollo-client": "2.6.3",
     "apollo-link": "1.2.11",
     "apollo-link-error": "1.1.10",
     "apollo-link-http": "1.5.14",
