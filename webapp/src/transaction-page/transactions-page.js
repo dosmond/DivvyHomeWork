@@ -1,24 +1,30 @@
 import React from 'react'
 import { css } from '@emotion/core'
-import { Space, Card } from 'antd'
+import { Space, Card, Col, Row } from 'antd'
+import AddTransaction from './add-transaction'
 
-// function Transaction() {
-
-// }
+function Transaction () {
+  return <p>This is a transaction</p>
+}
 
 export function Transactions () {
+  const transactions = ['first', 'second', 'third'].map((item) => <Transaction key={item} />)
+
   return (
-    <>
-      <Space css={cardStyle} direction='vertical'>
-        <Card title='Transactions'>
-          <p>Card content</p>
-          <p>Card content</p>
-        </Card>
-      </Space>
-    </>
+    <Row>
+      <Col span={17}>
+        <Space css={transactionStyle} direction='vertical'>
+          <Card title='Transactions'>{ transactions }</Card>
+        </Space>
+      </Col>
+      <Col offset={1} span={6}>
+        <AddTransaction />
+      </Col>
+    </Row>
   )
 }
 
-const cardStyle = css`
-    min-width: 100%;
+const transactionStyle = css`
+  width: 100%;
+  box-shadow: -1px 0px 5px 0px rgba(0, 0, 0, 0.14);
 `
