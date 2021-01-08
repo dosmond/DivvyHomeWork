@@ -6,11 +6,14 @@ var prevValue = ''
 
 NumInput.propTypes = {
   placeholder: PropTypes.string,
-  id: PropTypes.string
+  id: PropTypes.string,
+  value: PropTypes.string,
+  onChange: PropTypes.func
 }
 
-function NumInput ({ placeholder, id }) {
-  const [value, setValue] = useState('')
+function NumInput ({ placeholder, id, value, onChange }) {
+  const [curValue, setValue] = useState('')
+  value = curValue
 
   const validate = (e) => {
     let curVal = removeCommas(e.target.value)
@@ -23,13 +26,18 @@ function NumInput ({ placeholder, id }) {
       setValue(newValue)
       prevValue = newValue
     }
+
+    if (onChange) {
+      onChange(value)
+    }
   }
 
   const getCurValue = () => {
-    prevValue = value
+    prevValue = curValue
+    value = curValue
   }
 
-  return <Input addonBefore='$' id={id} onChange={validate} onFocus={getCurValue} placeholder={placeholder} value={value} />
+  return <Input addonBefore='$' id={id} onChange={validate} onFocus={getCurValue} placeholder={placeholder} value={curValue} />
 }
 
 export default NumInput

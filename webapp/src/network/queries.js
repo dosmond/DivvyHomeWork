@@ -23,11 +23,35 @@ export const GET_TRANSACTIONS = gql`
     }
 `
 
-export const GET_MERCHANT = gql`
+export const GET_MERCHANTS = gql`
   {
     merchants {
         id
         name
+    }
+  }
+`
+
+export const GET_USERS = gql`
+  {
+    users {
+        id
+        firstName
+        lastName
+    }
+  }
+`
+
+export const GET_MERCHANTS_AND_USERS = gql`
+  {
+    merchants {
+      id
+      name
+    },
+    users {
+        id
+        firstName
+        lastName
     }
   }
 `

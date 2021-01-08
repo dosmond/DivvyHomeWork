@@ -7,7 +7,7 @@ import { GET_TRANSACTIONS } from '../network/queries'
 import TransactionTable from './transaction-table'
 
 export function Transactions () {
-  const { loading, error, data } = useQuery(GET_TRANSACTIONS)
+  const { loading, error, data, refetch } = useQuery(GET_TRANSACTIONS)
 
   if (loading) return 'Loading...'
   if (error) return `Error! ${error.message}`
@@ -21,7 +21,7 @@ export function Transactions () {
         </Space>
       </Col>
       <Col offset={1} span={6}>
-        <AddTransaction />
+        <AddTransaction refetch={refetch} />
       </Col>
     </Row>
   )
