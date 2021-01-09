@@ -51,7 +51,7 @@ export function Transactions () {
           <AddTransaction refetch={refetch} />
         </Row>
         <Row>
-          <TransactionTotal />
+          <TransactionTotal transactions={transactions} />
         </Row>
         <Row>
           <Space css={deleteStyle} direction='vertical'>
