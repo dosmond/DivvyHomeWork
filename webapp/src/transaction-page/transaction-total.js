@@ -21,7 +21,7 @@ function TransactionTotal ({ transactions }) {
       color = 'limegreen'
     }
 
-    balance = result
+    balance = result / 100
   }
 
   return (

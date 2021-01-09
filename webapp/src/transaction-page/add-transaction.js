@@ -54,7 +54,7 @@ function AddTransaction ({ refetch }) {
       return
     }
 
-    addAmount = parseFloat(removeCommas(addAmount))
+    addAmount = parseFloat(removeCommas(addAmount)) * 100
 
     createTransaction(
       {

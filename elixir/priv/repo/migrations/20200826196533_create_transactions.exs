@@ -4,7 +4,7 @@ defmodule Homework.Repo.Migrations.CreateTransactions do
   def change do
     create table(:transactions, primary_key: false) do
       add(:id, :uuid, primary_key: true)
-      add(:amount, :float)
+      add(:amount, :integer)
       add(:credit, :boolean, default: false, null: false)
       add(:debit, :boolean, default: false, null: false)
       add(:description, :string)

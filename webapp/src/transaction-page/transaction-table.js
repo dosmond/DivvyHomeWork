@@ -22,9 +22,9 @@ function TransactionTable ({ transactions, refetch, roman }) {
     item['merchantName'] = item.merchant.name
 
     if (!roman) {
-      item['fixedAmount'] = '$' + addCommas(parseFloat(item.amount).toFixed(2))
+      item['fixedAmount'] = '$' + addCommas(parseFloat(item.amount / 100).toFixed(2))
     } else {
-      item['fixedAmount'] = '$' + toRomanNumerals(Math.round(item.amount))
+      item['fixedAmount'] = '$' + toRomanNumerals(Math.round(item.amount / 100))
     }
 
     item['userName'] = `${item.user.firstName} ${item.user.lastName}`

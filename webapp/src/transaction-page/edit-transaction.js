@@ -68,7 +68,7 @@ function EditTransaction ({ refetch, transactionId, closeModal, amount, descript
       return
     }
 
-    addAmount = parseFloat(removeCommas(addAmount))
+    addAmount = parseFloat(removeCommas(addAmount)) * 100
 
     editTransaction(
       {

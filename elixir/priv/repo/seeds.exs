@@ -60,7 +60,7 @@ merchants = [
 
 transactions = [
   %{
-    amount: -5.99,
+    amount: -599,
     credit: false,
     debit: true,
     description: "Daily swig",
@@ -68,7 +68,7 @@ transactions = [
     user_id: "b20a7ce9-684e-4ff4-86a4-dce38efa1234"
   },
   %{
-    amount: -69900.00,
+    amount: -6990000,
     credit: true,
     debit: false,
     description: "Lunchbox Truck",
@@ -76,7 +76,7 @@ transactions = [
     user_id: "b20a7ce9-684e-4ff4-86a4-dce38efa1235"
   },
   %{
-    amount: -100000.00,
+    amount: -10000000,
     credit: true,
     debit: false,
     description: "It's expensive because I can",
