@@ -5,7 +5,7 @@ import { Space, Card } from 'antd'
 function TransactionTotal () {
   return (
     <Space css={totalTransactionStyle} direction='vertical'>
-      <Card title='Transactions'>
+      <Card title='Totals'>
         <p>Totals here</p>
       </Card>
     </Space>

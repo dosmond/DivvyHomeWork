@@ -197,6 +197,7 @@ function ToRomanNumerals (num) {
     isNegative = true
     num = Math.abs(num)
   }
+
   var romNumerals = [
     ['\u2188', 100000], ['\u2182\u2188', 90000],
     ['\u2187', 50000], ['\u2182\u2187', 40000],
@@ -207,7 +208,7 @@ function ToRomanNumerals (num) {
     ['\u216D', 100], ['\u2169\u216D', 90],
     ['\u216C', 50], ['\u2169\u216C', 40],
     ['\u2169', 10], ['\u2160\u2169', 9],
-    ['\u2165', 5], ['\u2160\u2165', 4],
+    ['\u2164', 5], ['\u2160\u2164', 4],
     ['\u2160', 1]
   ]
   var runningTotal = 0
