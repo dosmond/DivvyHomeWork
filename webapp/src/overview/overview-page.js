@@ -1,4 +1,5 @@
 import React from 'react'
+import { css } from '@emotion/core'
 import { useQuery } from '@apollo/react-hooks'
 import PieChart from '../components/pie-chart'
 import LineChart from '../components/line-chart'
@@ -21,37 +22,50 @@ export function Overview () {
   let lineChartData = convertTransactionsToLineChartData(transactions)
 
   return (
-    <Row>
-      <Col span={6}>
-        <Space direction='vertical'>
-          <Card title='Transactions By Merchant'>
-            <div style={{ height: '15vw', width: '15vw' }}>
-              <PieChart data={merchantPieChartData} />
-            </div>
-          </Card>
-        </Space>
-      </Col>
-      <Col offset={1} span={6}>
-        <Space direction='vertical'>
-          <Card title='Transactions By User'>
-            <div style={{ height: '15vw', width: '15vw' }}>
-              <PieChart data={userPieChartData} />
-            </div>
-          </Card>
-        </Space>
-      </Col>
-      <Col offset={1} span={10}>
-        <Space direction='vertical'>
-          <Card title='Transaction History'>
-            <div style={{ height: '15vw', width: '30vw' }}>
-              <LineChart data={lineChartData} />
-            </div>
-          </Card>
-        </Space>
-      </Col>
-    </Row>
+    <Space css={outerBoxStyle} direction='vertical'>
+      <Card>
+        <Row>
+          <Col span={6}>
+            <Space css={withBoxShadow} direction='vertical'>
+              <Card title='Transactions By Merchant'>
+                <div style={{ height: '15vw', width: '15vw' }}>
+                  <PieChart data={merchantPieChartData} />
+                </div>
+              </Card>
+            </Space>
+          </Col>
+          <Col offset={1} span={6}>
+            <Space css={withBoxShadow} direction='vertical'>
+              <Card title='Transactions By User'>
+                <div style={{ height: '15vw', width: '15vw' }}>
+                  <PieChart data={userPieChartData} />
+                </div>
+              </Card>
+            </Space>
+          </Col>
+          <Col offset={1} span={10}>
+            <Space css={withBoxShadow} direction='vertical'>
+              <Card title='Transaction History'>
+                <div style={{ height: '15vw', width: '25vw' }}>
+                  <LineChart data={lineChartData} />
+                </div>
+              </Card>
+            </Space>
+          </Col>
+        </Row>
+      </Card>
+    </Space>
   )
 }
+
+const outerBoxStyle = css`
+  width: 100%;
+  box-shadow: -1px 0px 5px 0px rgba(0, 0, 0, 0.14);
+`
+
+const withBoxShadow = css`
+  box-shadow: -1px 0px 5px 0px rgba(0, 0, 0, 0.14);
+`
 
 function convertTransactionsToMerchantPieChartData (transactions) {
   let merchantCount = {}

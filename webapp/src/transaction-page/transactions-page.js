@@ -5,6 +5,7 @@ import AddTransaction from './add-transaction'
 import { useQuery } from '@apollo/react-hooks'
 import { GET_TRANSACTIONS } from '../network/queries'
 import TransactionTable from './transaction-table'
+import TransactionTotal from './transaction-total'
 
 export function Transactions () {
   const { loading, error, data, refetch } = useQuery(GET_TRANSACTIONS)
@@ -19,7 +20,7 @@ export function Transactions () {
   }
 
   return (
-    <Row>
+    <Row css={noMarginTop}>
       <Col span={17}>
         <Space css={transactionStyle} direction='vertical'>
           <Card extra={<div>Use Roman Numerals <Switch checked={roman} onChange={handleRomanChange} /></div>} title='Transactions'>
@@ -28,7 +29,12 @@ export function Transactions () {
         </Space>
       </Col>
       <Col offset={1} span={6}>
-        <AddTransaction refetch={refetch} />
+        <Row>
+          <AddTransaction refetch={refetch} />
+        </Row>
+        <Row>
+          <TransactionTotal />
+        </Row>
       </Col>
     </Row>
   )
@@ -37,4 +43,8 @@ export function Transactions () {
 const transactionStyle = css`
   width: 100%;
   box-shadow: -1px 0px 5px 0px rgba(0, 0, 0, 0.14);
+`
+
+const noMarginTop = css`
+  margin-top: 0;
 `

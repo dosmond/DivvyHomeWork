@@ -30,6 +30,7 @@ export default AppRouter
 
 const contentStyle = css`
   grid-row: 2;
+  margin-top: 15px;
 `
 
 const menuStyle = css`

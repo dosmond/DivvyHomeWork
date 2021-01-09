@@ -142,6 +142,7 @@ function AddTransaction ({ refetch }) {
 export default AddTransaction
 
 const addTransactionStyle = css`
+  margin-top: 15px;
   min-width: 100%;
   box-shadow: -1px 0px 5px 0px rgba(0, 0, 0, 0.14);
 `
