@@ -17,9 +17,10 @@ function TransactionTable ({ transactions, refetch }) {
     item['merchantName'] = item.merchant.name
     item['fixedAmount'] = '$' + addCommas(parseFloat(item.amount).toFixed(2))
     item['userName'] = `${item.user.firstName} ${item.user.lastName}`
+    let options = { year: 'numeric', month: 'short', day: 'numeric' }
+    let [date] = new Date(item.insertedAt).toLocaleDateString('en-US', options).split('/')
+    item['date'] = `${date}`
   })
-
-  console.log(transactions)
 
   const [visible, setVisible] = useState(false)
   const [deleteVisible, setDeleteVisible] = useState(false)
@@ -53,6 +54,7 @@ function TransactionTable ({ transactions, refetch }) {
     <>
       <Table dataSource={transactions} rowKey={record => record.id}>
         <Column dataIndex='description' key='description' title='Description' />
+        <Column dataIndex='date' key='date' title='Date' />
         <Column dataIndex='userName' key='userName' title='User' />
         <Column dataIndex='merchantName' key='merchant' title='Merchant' />
         <Column
