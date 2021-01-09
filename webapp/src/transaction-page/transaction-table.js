@@ -56,7 +56,6 @@ function TransactionTable ({ transactions, refetch }) {
   }
 
   const handleDelete = () => {
-    console.log('called', transactionId)
     deleteTransaction({
       variables: {
         id: transactionId
