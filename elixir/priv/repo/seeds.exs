@@ -60,7 +60,7 @@ merchants = [
 
 transactions = [
   %{
-    amount: 5.99,
+    amount: -5.99,
     credit: false,
     debit: true,
     description: "Best SWIG",
@@ -68,15 +68,15 @@ transactions = [
     user_id: "b20a7ce9-684e-4ff4-86a4-dce38efa1234"
   },
   %{
-    amount: 64500.00,
+    amount: -64500.00,
     credit: true,
     debit: false,
-    description: "Lunchbox",
+    description: "Lunchbox Truck",
     merchant_id: "b20a7ce9-684e-4ff4-86a4-dce38efa1238",
     user_id: "b20a7ce9-684e-4ff4-86a4-dce38efa1235"
   },
   %{
-    amount: 1000000000.00,
+    amount: -1000000000.00,
     credit: true,
     debit: false,
     description: "Most expensive item on amazon because why not",

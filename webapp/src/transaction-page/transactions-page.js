@@ -17,7 +17,7 @@ export function Transactions () {
     <Row>
       <Col span={17}>
         <Space css={transactionStyle} direction='vertical'>
-          <Card title='Transactions'><TransactionTable transactions={transactions} /> </Card>
+          <Card title='Transactions'><TransactionTable refetch={refetch} transactions={transactions} /> </Card>
         </Space>
       </Col>
       <Col offset={1} span={6}>

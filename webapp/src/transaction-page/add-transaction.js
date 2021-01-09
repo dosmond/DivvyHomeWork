@@ -14,11 +14,11 @@ AddTransaction.propTypes = {
 
 function AddTransaction ({ refetch }) {
   const [radioValue, setRadioValue] = useState('Credit')
+  const [submitLoading, setSubmitLoading] = useState(false)
+  const [isDisabled, setIsDisabled] = useState(false)
   const [form] = Form.useForm()
   const [createTransaction] = useMutation(CREATE_TRANSACTION)
   const { loading, error, data } = useQuery(GET_MERCHANTS_AND_USERS)
-
-  var isDisabled = false
 
   if (loading) return 'Loading...'
   if (error) return `Error! ${error.message}`
@@ -32,29 +32,28 @@ function AddTransaction ({ refetch }) {
     setRadioValue('Credit')
   }
 
+  const finishTransaction = () => {
+    handleClear()
+    setIsDisabled(false)
+    setSubmitLoading(false)
+  }
+
   const handleSubmit = () => {
+    setIsDisabled(true)
+    setSubmitLoading(true)
+
     var addAmount = form.getFieldValue('amount')
-
-    isDisabled = true
-
-    if (addAmount === undefined) {
-      handleClear()
-      isDisabled = false
-      return
-    } else {
-      addAmount = parseFloat(removeCommas(addAmount))
-    }
-
     var addType = form.getFieldValue('type')
     var addDescription = form.getFieldValue('description')
     var addMerchant = form.getFieldValue('merchant')
     var addUser = form.getFieldValue('user')
 
     if (addDescription === undefined || addMerchant === undefined || addUser === undefined || addType === undefined) {
-      handleClear()
-      isDisabled = false
+      finishTransaction()
       return
     }
+
+    addAmount = parseFloat(removeCommas(addAmount))
 
     createTransaction(
       {
@@ -70,8 +69,7 @@ function AddTransaction ({ refetch }) {
       }
     ).then(() => {
       refetch()
-      handleClear()
-      isDisabled = false
+      finishTransaction()
     })
   }
 
@@ -79,10 +77,14 @@ function AddTransaction ({ refetch }) {
     <Space css={addTransactionStyle} direction='vertical'>
       <Card title='Add Transaction'>
         <Form form={form}>
-          <Form.Item name='amount' rules={[{ required: true, message: 'Please input an amount' }]}>
+          <Form.Item
+            name='amount'
+            rules={[{ required: true, message: 'Please input an amount' }]}>
             <NumInput id='amount' placeholder='Amount' />
           </Form.Item>
-          <Form.Item name='merchant' rules={[{ required: true, message: 'Please select a merchant' }]}>
+          <Form.Item
+            name='merchant'
+            rules={[{ required: true, message: 'Please select a merchant' }]}>
             <Select
               optionFilterProp='children'
               placeholder='Select a merchant'
@@ -113,10 +115,21 @@ function AddTransaction ({ refetch }) {
             </Radio.Group>
           </Form.Item>
           <Form.Item>
-            <Button css={submitButtonStyle} disabled={isDisabled} htmlType='submit' id='add-transaction-submit' onClick={handleSubmit} type='primary'>
+            <Button
+              css={submitButtonStyle}
+              disabled={isDisabled}
+              htmlType='submit'
+              id='add-transaction-submit'
+              loading={submitLoading}
+              onClick={handleSubmit}
+              type='primary'>
                     Submit
             </Button>
-            <Button danger disabled={isDisabled} id='add-transaction-cancel' onClick={handleClear}>
+            <Button
+              danger
+              disabled={isDisabled}
+              id='add-transaction-cancel'
+              onClick={handleClear}>
                     Clear
             </Button>
           </Form.Item>
@@ -132,10 +145,6 @@ const addTransactionStyle = css`
   min-width: 100%;
   box-shadow: -1px 0px 5px 0px rgba(0, 0, 0, 0.14);
 `
-
-// const merchantInputStyle = css`
-//   min-width: 100%;
-// `
 
 const submitButtonStyle = css`
   margin-right: 2%;

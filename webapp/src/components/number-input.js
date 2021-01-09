@@ -8,11 +8,12 @@ NumInput.propTypes = {
   placeholder: PropTypes.string,
   id: PropTypes.string,
   value: PropTypes.string,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  initialValue: PropTypes.string
 }
 
-function NumInput ({ placeholder, id, value = '', onChange }) {
-  const [curValue, setValue] = useState('')
+function NumInput ({ placeholder, id, initialValue = '', value = '', onChange }) {
+  const [curValue, setValue] = useState(initialValue)
 
   const validate = (e) => {
     let curVal = removeCommas(e.target.value)

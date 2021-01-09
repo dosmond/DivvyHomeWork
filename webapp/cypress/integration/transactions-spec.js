@@ -28,7 +28,7 @@ describe('Transactions page', () => {
       cy.get('#radio-debit').should('not.be.checked', '')
     })
 
-    it.only('Should be able to add a transacton', () => {
+    it('Should be able to add a transacton', () => {
       let random = Math.random().toString(36).substring(7)
       cy.get('#amount').clear().type('5.99')
       cy.get('#merchant').clear().type('Walmart{enter}')
