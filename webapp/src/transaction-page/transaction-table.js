@@ -3,7 +3,10 @@ import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 import { Table, Space, Modal } from 'antd'
 import { EditTwoTone, DeleteTwoTone } from '@ant-design/icons'
+import { useMutation } from '@apollo/react-hooks'
+import { DELETE_TRANSACTION } from '../network/mutations'
 import EditTransaction from './edit-transaction'
+import DeleteTransaction from './delete-transaction'
 
 const { Column } = Table
 
@@ -30,6 +33,7 @@ function TransactionTable ({ transactions, refetch }) {
   const [merchant, setMerchant] = useState('')
   const [user, setUser] = useState('')
   const [type, setType] = useState('')
+  const [deleteTransaction] = useMutation(DELETE_TRANSACTION)
 
   const showEditModal = (record) => {
     setVisible(true)
@@ -41,13 +45,26 @@ function TransactionTable ({ transactions, refetch }) {
     setType(() => record.credit ? 'Credit' : 'Debit')
   }
 
-  const showDelteModal = (record) => {
+  const showDeleteModal = (record) => {
     setDeleteVisible(true)
     setTransactionId(record.id)
   }
 
   const handleCancel = () => {
     setVisible(false)
+    setDeleteVisible(false)
+  }
+
+  const handleDelete = () => {
+    console.log('called', transactionId)
+    deleteTransaction({
+      variables: {
+        id: transactionId
+      }
+    }).then(() => {
+      refetch()
+      handleCancel()
+    })
   }
 
   return (
@@ -76,7 +93,7 @@ function TransactionTable ({ transactions, refetch }) {
           render={(text, record) => (
             <Space size='middle'>
               <button css={actionButtonStyle} onClick={() => showEditModal(record)}><EditTwoTone /></button>
-              <button css={actionButtonStyle} onClick={() => showDelteModal(record)}><DeleteTwoTone twoToneColor='#eb2f96' /></button>
+              <button css={actionButtonStyle} onClick={() => showDeleteModal(record)}><DeleteTwoTone twoToneColor='#eb2f96' /></button>
             </Space>
           )}
           title='Action'
@@ -100,16 +117,13 @@ function TransactionTable ({ transactions, refetch }) {
         />
       </Modal>
       <Modal
-        footer={null}
         onCancel={handleCancel}
+        onOk={handleDelete}
         title='Delete Transaction'
         visible={deleteVisible}
       >
-        {/* <DeleteTransaction
-          closeModal={handleCancel}
-          refetch={refetch}
-          transactionId={transactionId}
-        /> */}
+        <DeleteTransaction
+        />
       </Modal>
     </>
   )
