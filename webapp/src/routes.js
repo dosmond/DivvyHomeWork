@@ -4,6 +4,7 @@ import { css } from '@emotion/core'
 import { Overview } from './overview/overview-page'
 import { Menu } from 'antd'
 import { Transactions } from './transaction-page/transactions-page'
+import { Merchants } from './merchants-page/merchants-page'
 
 function AppRouter () {
   return (
@@ -16,10 +17,14 @@ function AppRouter () {
           <Menu.Item key='transactions'>
             <Link to='/transactions'>Transactions</Link>
           </Menu.Item>
+          <Menu.Item key='merchants'>
+            <Link to='/merchants'>Merchants</Link>
+          </Menu.Item>
         </Menu>
         <div className='main-content' css={contentStyle}>
           <Route component={Overview} exact path='/' />
           <Route component={Transactions} exact path='/transactions' />
+          <Route component={Merchants} exact path='/merchants' />
         </div>
       </Router>
     </div>
