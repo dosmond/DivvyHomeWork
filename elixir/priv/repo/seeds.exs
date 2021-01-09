@@ -63,12 +63,12 @@ transactions = [
     amount: -5.99,
     credit: false,
     debit: true,
-    description: "Best SWIG",
+    description: "Daily swig",
     merchant_id: "b20a7ce9-684e-4ff4-86a4-dce38efa3214",
     user_id: "b20a7ce9-684e-4ff4-86a4-dce38efa1234"
   },
   %{
-    amount: -64500.00,
+    amount: -69900.00,
     credit: true,
     debit: false,
     description: "Lunchbox Truck",
@@ -76,10 +76,10 @@ transactions = [
     user_id: "b20a7ce9-684e-4ff4-86a4-dce38efa1235"
   },
   %{
-    amount: -1000000000.00,
+    amount: -100000.00,
     credit: true,
     debit: false,
-    description: "Most expensive item on amazon because why not",
+    description: "It's expensive because I can",
     merchant_id: "b20a7ce9-684e-4ff4-86a4-dce38efa1239",
     user_id: "b20a7ce9-684e-4ff4-86a4-dce38efa1236"
   }
