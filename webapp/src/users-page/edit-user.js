@@ -1,23 +1,24 @@
 import React, { useState, useEffect } from 'react'
 import { css } from '@emotion/core'
-import { Form, Input, Button } from 'antd'
+import { Form, Input, Button, DatePicker } from 'antd'
 import { useMutation } from '@apollo/react-hooks'
-import { EDIT_MERCHANT } from '../network/mutations'
+import { EDIT_USER } from '../network/mutations'
 import PropTypes from 'prop-types'
 
-EditMerchant.propTypes = {
+EditUser.propTypes = {
   refetch: PropTypes.func,
-  merchantId: PropTypes.string,
+  userId: PropTypes.string,
   closeModal: PropTypes.func,
-  name: PropTypes.string,
-  description: PropTypes.string
+  firstName: PropTypes.string,
+  lastName: PropTypes.string,
+  dob: PropTypes.object
 }
 
-function EditMerchant ({ refetch, merchantId, closeModal, name, description }) {
+function EditUser ({ refetch, userId, closeModal, firstName, lastName, dob }) {
   const [submitLoading, setSubmitLoading] = useState(false)
   const [isDisabled, setIsDisabled] = useState(false)
   const [form] = Form.useForm()
-  const [editMerchant] = useMutation(EDIT_MERCHANT)
+  const [editUser] = useMutation(EDIT_USER)
 
   useEffect(() => {
     form.resetFields()
@@ -40,21 +41,23 @@ function EditMerchant ({ refetch, merchantId, closeModal, name, description }) {
     setIsDisabled(true)
     setSubmitLoading(true)
 
-    var editDescription = form.getFieldValue('description')
-    var editName = form.getFieldValue('name')
+    var editFirstName = form.getFieldValue('firstName')
+    var editLastName = form.getFieldValue('lastName')
+    var editDOB = form.getFieldValue('dob').format('DD/MM/YYYY')
 
-    if (editDescription === undefined || editName === undefined) {
+    if (editFirstName === undefined || editLastName === undefined || editDOB === undefined) {
       finishTransaction()
       return
     }
 
-    editMerchant(
+    editUser(
       {
         variables:
           {
-            id: merchantId,
-            name: editName,
-            description: editDescription
+            id: userId,
+            firstName: editFirstName,
+            lastName: editLastName,
+            dob: editDOB
           }
       }
     ).then(() => {
@@ -66,18 +69,21 @@ function EditMerchant ({ refetch, merchantId, closeModal, name, description }) {
 
   return (
     <Form form={form}>
-      <Form.Item initialValue={name} name='name' rules={[{ required: true, message: 'Please enter a name' }]}>
-        <Input id='edit-name' placeholder='Name' />
+      <Form.Item initialValue={firstName} name='firstName' rules={[{ required: true, message: 'Please enter a first name' }]}>
+        <Input id='add-firstName' placeholder='First Name' />
       </Form.Item>
-      <Form.Item initialValue={description} name='description' rules={[{ required: true, message: 'Please enter a description' }]}>
-        <Input id='edit-description' placeholder='Description' />
+      <Form.Item initialValue={lastName} name='lastName' rules={[{ required: true, message: 'Please enter a last name' }]}>
+        <Input id='add-lastName' placeholder='Last Name' />
+      </Form.Item>
+      <Form.Item initialValue={dob} name='dob' rules={[{ required: true, message: 'Please enter a date of birth' }]}>
+        <DatePicker css={fullWidthStyle} placeholder='Select a DOB' />
       </Form.Item>
       <Form.Item>
         <Button
           css={submitButtonStyle}
           disabled={isDisabled}
           htmlType='submit'
-          id='edit-transaction-submit'
+          id='add-user-submit'
           loading={submitLoading}
           onClick={handleSubmit}
           type='primary'>
@@ -86,7 +92,7 @@ function EditMerchant ({ refetch, merchantId, closeModal, name, description }) {
         <Button
           danger
           disabled={isDisabled}
-          id='edit-transaction-cancel'
+          id='add-user-cancel'
           onClick={() => handleClear(true)}>
                     Cancel
         </Button>
@@ -95,7 +101,7 @@ function EditMerchant ({ refetch, merchantId, closeModal, name, description }) {
   )
 }
 
-export default EditMerchant
+export default EditUser
 
 const submitButtonStyle = css`
   margin-right: 2%;
@@ -109,4 +115,7 @@ const submitButtonStyle = css`
     border-color: #a5ed93;
     color: #a5ed93;
   }
+`
+const fullWidthStyle = css`
+  width: 100%;
 `

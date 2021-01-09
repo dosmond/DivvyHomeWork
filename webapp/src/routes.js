@@ -5,6 +5,7 @@ import { Overview } from './overview/overview-page'
 import { Menu } from 'antd'
 import { Transactions } from './transaction-page/transactions-page'
 import { Merchants } from './merchants-page/merchants-page'
+import { Users } from './users-page/users-page'
 
 function AppRouter () {
   return (
@@ -20,11 +21,15 @@ function AppRouter () {
           <Menu.Item key='merchants'>
             <Link to='/merchants'>Merchants</Link>
           </Menu.Item>
+          <Menu.Item key='users'>
+            <Link to='/users'>Users</Link>
+          </Menu.Item>
         </Menu>
         <div className='main-content' css={contentStyle}>
           <Route component={Overview} exact path='/' />
           <Route component={Transactions} exact path='/transactions' />
           <Route component={Merchants} exact path='/merchants' />
+          <Route component={Users} exact path='/users' />
         </div>
       </Router>
     </div>

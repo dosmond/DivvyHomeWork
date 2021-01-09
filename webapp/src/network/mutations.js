@@ -53,8 +53,38 @@ export const EDIT_MERCHANT = gql`
 `
 
 export const DELETE_MERCHANT = gql`
-  mutation EditMerchant($id: ID!) {
+  mutation DeleteMerchant($id: ID!) {
     deleteMerchant(id: $id){
+      id
+    }
+  }
+`
+
+export const CREATE_USER = gql`
+  mutation CreateUser($firstName: String!, $lastName: String!, $dob: String!) {
+    createUser(firstName: $firstName, lastName: $lastName, dob: $dob){
+      id
+      firstName
+      lastName
+      dob
+    }
+  }
+`
+
+export const EDIT_USER = gql`
+  mutation EditUser($id: ID!, $firstName: String!, $lastName: String!, $dob: String!) {
+    updateUser(id: $id, firstName: $name, lastName: $description, dob: $dob){
+      id
+      firstName
+      lastName
+      dob
+    }
+  }
+`
+
+export const DELETE_USER = gql`
+  mutation DeleteUser($id: ID!) {
+    deleteUser(id: $id){
       id
     }
   }

@@ -154,7 +154,7 @@ function EditTransaction ({ refetch, transactionId, closeModal, amount, descript
           disabled={isDisabled}
           id='edit-transaction-cancel'
           onClick={() => handleClear(true)}>
-                    Clear
+                    Cancel
         </Button>
       </Form.Item>
     </Form>

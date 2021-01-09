@@ -57,6 +57,7 @@
     "emotion-theming": "10.0.10",
     "graphql": "14.3.1",
     "graphql-tag": "^2.10.1",
+    "moment": "^2.29.1",
     "prop-types": "15.7.2",
     "react": "16.8.6",
     "react-apollo": "2.5.6",
