@@ -107,8 +107,8 @@ function TransactionTable ({ transactions, refetch, roman }) {
           key='action'
           render={(text, record) => (
             <Space size='middle'>
-              <button css={actionButtonStyle} onClick={() => showEditModal(record)}><EditTwoTone /></button>
-              <button css={actionButtonStyle} onClick={() => showDeleteModal(record)}><DeleteTwoTone twoToneColor='#eb2f96' /></button>
+              <button css={actionButtonStyle} data-cy='edit' onClick={() => showEditModal(record)}><EditTwoTone /></button>
+              <button css={actionButtonStyle} data-cy='delete' onClick={() => showDeleteModal(record)}><DeleteTwoTone twoToneColor='#eb2f96' /></button>
             </Space>
           )}
           title='Action'
@@ -141,6 +141,7 @@ function TransactionTable ({ transactions, refetch, roman }) {
           </Button>,
           <Button
             css={submitButtonStyle}
+            id='delete-transaction-submit'
             key='submit'
             loading={deleteLoading}
             onClick={handleDelete}
