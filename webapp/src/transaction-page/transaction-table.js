@@ -47,7 +47,7 @@ function TransactionTable ({ transactions, refetch, roman }) {
   const showEditModal = (record) => {
     setVisible(true)
     setTransactionId(record.id)
-    setAmount(record.amount.toString())
+    setAmount((record.amount / 100).toString())
     setDescription(record.description)
     setMerchant(record.merchant.id)
     setUser(record.user.id)
