@@ -111,6 +111,10 @@ function convertTransactionsToLineChartData (transactions) {
   let monthCount = {}
   let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
+  if (transactions.length === 0) {
+    return []
+  }
+
   months.forEach((month) => {
     monthCount[month] = 0
   })
