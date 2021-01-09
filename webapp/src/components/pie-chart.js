@@ -6,29 +6,9 @@ const PieChart = ({ data }) => (
   <ResponsivePie
     borderColor={{ from: 'color', modifiers: [ [ 'darker', 0.2 ] ] }}
     borderWidth={1}
-    colors={{ scheme: 'nivo' }}
+    colors={{ scheme: 'accent' }}
     cornerRadius={3}
     data={data}
-    defs={[
-      {
-        id: 'dots',
-        type: 'patternDots',
-        background: 'inherit',
-        color: 'rgba(255, 255, 255, 0.3)',
-        size: 4,
-        padding: 1,
-        stagger: true
-      },
-      {
-        id: 'lines',
-        type: 'patternLines',
-        background: 'inherit',
-        color: 'rgba(255, 255, 255, 0.3)',
-        rotation: -45,
-        lineWidth: 6,
-        spacing: 10
-      }
-    ]}
     innerRadius={0.5}
     legends={[
       {
@@ -38,7 +18,7 @@ const PieChart = ({ data }) => (
         translateX: 0,
         translateY: 56,
         itemsSpacing: 0,
-        itemWidth: 100,
+        itemWidth: 80,
         itemHeight: 18,
         itemTextColor: '#999',
         itemDirection: 'left-to-right',

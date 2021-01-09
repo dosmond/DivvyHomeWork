@@ -69,18 +69,23 @@ function TransactionTable ({ transactions, refetch }) {
     })
   }
 
+  const getTypeByCredit = (credit) => {
+    return credit ? 'Credit' : 'Debit'
+  }
+
   return (
     <>
       <Table dataSource={transactions} rowKey={record => record.id}>
-        <Column dataIndex='description' key='description' title='Description' />
-        <Column dataIndex='date' key='date' title='Date' />
-        <Column dataIndex='userName' key='userName' title='User' />
-        <Column dataIndex='merchantName' key='merchant' title='Merchant' />
+        <Column dataIndex='description' ellipsis key='description' title='Description' />
+        <Column dataIndex='date' key='date' sorter={(a, b) => a - b} title='Date' />
+        <Column dataIndex='userName' key='userName' sorter={(a, b) => a.userName.toLowerCase().localeCompare(b.userName.toLowerCase())} title='User' />
+        <Column dataIndex='merchantName' key='merchant' sorter={(a, b) => a.merchantName.toLowerCase().localeCompare(b.merchantName.toLowerCase())} title='Merchant' />
         <Column
           key='type'
           render={(text, record) => (
-            <label>{record.credit ? 'Credit' : 'Debit'}</label>
+            <label>{getTypeByCredit(record.credit)}</label>
           )}
+          sorter={(a, b) => getTypeByCredit(a.credit).toLowerCase().localeCompare(getTypeByCredit(b.credit))}
           title='Type'
         />
         <Column
@@ -88,6 +93,7 @@ function TransactionTable ({ transactions, refetch }) {
           render={(text, record) => (
             <label style={{ color: `${record.amount < 0 ? 'red' : 'limegreen'}` }}>{record.fixedAmount}</label>
           )}
+          sorter={(a, b) => a.amount - b.amount}
           title='Amount'
         />
         <Column
@@ -171,11 +177,6 @@ const submitButtonStyle = css`
   }
 `
 
-/**
- * Adds commas in currency fashion
- * @param input
- * @returns {*}
- */
 function addCommas (input) {
   return input
     .toString()

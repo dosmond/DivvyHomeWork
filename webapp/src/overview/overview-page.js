@@ -5,7 +5,7 @@ import LineChart from '../components/line-chart'
 import { GET_TRANSACTIONS } from '../network/queries'
 import { Space, Card, Row, Col } from 'antd'
 
-export function Home () {
+export function Overview () {
   const { loading, error, data } = useQuery(GET_TRANSACTIONS)
 
   if (loading) return 'Loading...'

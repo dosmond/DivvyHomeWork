@@ -8,10 +8,7 @@ const LineChart = ({ data }) => (
       orient: 'bottom',
       tickSize: 5,
       tickPadding: 5,
-      tickRotation: 0,
-      legend: 'transportation',
-      legendOffset: 36,
-      legendPosition: 'middle'
+      tickRotation: -45
     }}
     axisLeft={{
       orient: 'left',
@@ -24,6 +21,7 @@ const LineChart = ({ data }) => (
     }}
     axisRight={null}
     axisTop={null}
+    colors={{ scheme: 'accent' }}
     data={data}
     legends={[
       {
@@ -51,7 +49,7 @@ const LineChart = ({ data }) => (
         ]
       }
     ]}
-    margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
+    margin={{ top: 50, right: 110, bottom: 70, left: 60 }}
     pointBorderColor={{ from: 'serieColor' }}
     pointBorderWidth={2}
     pointColor={{ theme: 'background' }}
