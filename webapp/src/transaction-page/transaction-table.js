@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
-import { Table, Space, Modal } from 'antd'
+import { Table, Space, Modal, Button } from 'antd'
 import { EditTwoTone, DeleteTwoTone } from '@ant-design/icons'
 import { useMutation } from '@apollo/react-hooks'
 import { DELETE_TRANSACTION } from '../network/mutations'
@@ -26,6 +26,7 @@ function TransactionTable ({ transactions, refetch }) {
   })
 
   const [visible, setVisible] = useState(false)
+  const [deleteLoading, setDeleteLoading] = useState(false)
   const [deleteVisible, setDeleteVisible] = useState(false)
   const [transactionId, setTransactionId] = useState('')
   const [amount, setAmount] = useState('')
@@ -53,9 +54,11 @@ function TransactionTable ({ transactions, refetch }) {
   const handleCancel = () => {
     setVisible(false)
     setDeleteVisible(false)
+    setDeleteLoading(false)
   }
 
   const handleDelete = () => {
+    setDeleteLoading(true)
     deleteTransaction({
       variables: {
         id: transactionId
@@ -116,8 +119,22 @@ function TransactionTable ({ transactions, refetch }) {
         />
       </Modal>
       <Modal
-        onCancel={handleCancel}
-        onOk={handleDelete}
+        footer={[
+          <Button
+            danger
+            key='back'
+            onClick={handleCancel}>
+              Return
+          </Button>,
+          <Button
+            css={submitButtonStyle}
+            key='submit'
+            loading={deleteLoading}
+            onClick={handleDelete}
+            type='primary'>
+              Submit
+          </Button>
+        ]}
         title='Delete Transaction'
         visible={deleteVisible}
       >
@@ -137,6 +154,20 @@ const actionButtonStyle = css`
 
   &:hover {
       cursor: pointer;
+  }
+`
+
+const submitButtonStyle = css`
+  margin-right: 2%;
+
+  background: white;
+  border-color: limegreen;
+  color: limegreen;
+
+  &:hover {
+    background: white;
+    border-color: #a5ed93;
+    color: #a5ed93;
   }
 `
 
