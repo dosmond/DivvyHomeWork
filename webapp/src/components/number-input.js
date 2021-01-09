@@ -55,7 +55,7 @@ function isValidNumber (text, allowBlank) {
     return true
   }
 
-  var regex = /(^[-]?[0](\.[0-9]{0,2})?$)|(^[-]?[1-9][0-9]{0,10}?(\.[0-9]{0,2})?$)/
+  var regex = /(^[-]?[0](\.[0-9]{0,2})?$)|(^[-]?[1-9][0-9]{0,4}?(\.[0-9]{0,2})?$)/
   return !!text.match(regex)
 }
 

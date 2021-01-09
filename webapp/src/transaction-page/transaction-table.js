@@ -12,13 +12,20 @@ const { Column } = Table
 
 TransactionTable.propTypes = {
   transactions: PropTypes.array,
-  refetch: PropTypes.func
+  refetch: PropTypes.func,
+  roman: PropTypes.bool
 }
 
-function TransactionTable ({ transactions, refetch }) {
+function TransactionTable ({ transactions, refetch, roman }) {
   transactions.forEach(item => {
     item['merchantName'] = item.merchant.name
-    item['fixedAmount'] = '$' + addCommas(parseFloat(item.amount).toFixed(2))
+
+    if (!roman) {
+      item['fixedAmount'] = '$' + addCommas(parseFloat(item.amount).toFixed(2))
+    } else {
+      item['fixedAmount'] = '$' + ToRomanNumerals(Math.round(item.amount))
+    }
+
     item['userName'] = `${item.user.firstName} ${item.user.lastName}`
     let options = { year: 'numeric', month: 'short', day: 'numeric' }
     let [date] = new Date(item.insertedAt).toLocaleDateString('en-US', options).split('/')
@@ -182,4 +189,27 @@ function addCommas (input) {
     .toString()
     .replace(/,/g, '')
     .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+}
+
+function ToRomanNumerals (num) {
+  let isNegative = false
+  if (num < 0) {
+    isNegative = true
+    num = Math.abs(num)
+  }
+  var romNumerals = [['\u2188', 100000], ['\u2182\u2188', 90000], ['\u2187', 50000], ['\u2182\u2187', 40000], ['\u2182', 10000], ['\u216F\u2182', 9000], ['\u2181', 5000], ['\u216F\u2181', 4000], ['\u216F', 1000], ['\u216D\u216F', 900], ['\u216E', 500], ['\u216D\u216E', 400], ['\u216D', 100], ['\u2169\u216D', 90], ['\u216C', 50], ['\u2169\u216C', 40], ['\u2169', 10], ['\u2160\u2169', 9], ['\u2165', 5], ['\u2160\u2165', 4], ['\u2160', 1]]
+  var runningTotal = 0
+  var roman = ''
+  for (var i = 0; i < romNumerals.length; i++) {
+    while (runningTotal + romNumerals[i][1] <= num) {
+      runningTotal += romNumerals[i][1]
+      roman += romNumerals[i][0]
+    }
+  }
+
+  if (isNegative) {
+    return `-${roman}`
+  } else {
+    return roman
+  }
 }
