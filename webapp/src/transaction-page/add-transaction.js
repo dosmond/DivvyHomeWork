@@ -5,6 +5,7 @@ import NumInput from '../components/number-input'
 import { useMutation, useQuery } from '@apollo/react-hooks'
 import { CREATE_TRANSACTION } from '../network/mutations'
 import { GET_MERCHANTS_AND_USERS } from '../network/queries'
+import { removeCommas } from '../common/common'
 import PropTypes from 'prop-types'
 const { Option } = Select
 
@@ -160,12 +161,3 @@ const submitButtonStyle = css`
     color: #a5ed93;
   }
 `
-
-/**
- * Removes all commas.
- * @param input
- * @returns {*}
- */
-function removeCommas (input) {
-  return input.replace(/,/g, '')
-}
