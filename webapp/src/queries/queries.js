@@ -41,6 +41,12 @@ export const GET_USERS = gql`
         firstName
         lastName
         dob
+        company{
+          id
+          name
+          available_credit
+          credit_line
+        }
         insertedAt
     }
   }
@@ -68,6 +74,9 @@ export const GET_MERCHANTS_AND_USERS = gql`
         id
         firstName
         lastName
+        company {
+          name
+        }
     }
   }
 `

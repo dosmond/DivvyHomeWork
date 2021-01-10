@@ -1,25 +1,25 @@
 import React, { useState, useEffect } from 'react'
 import { css } from '@emotion/core'
-import { Form, Input, Button, DatePicker } from 'antd'
+import { Form, Input, Button } from 'antd'
 import { useMutation } from '@apollo/react-hooks'
-import { EDIT_USER } from '../mutations/user_mutations'
+import { EDIT_COMPANY } from '../../mutations/company_mutations'
 import PropTypes from 'prop-types'
+import NumInput from '../../components/number-input'
+import { removeCommas } from '../../common/common'
 
-EditUser.propTypes = {
+EditCompany.propTypes = {
   refetch: PropTypes.func,
-  userId: PropTypes.string,
+  companyId: PropTypes.string,
   closeModal: PropTypes.func,
-  firstName: PropTypes.string,
-  lastName: PropTypes.string,
-  dob: PropTypes.object,
-  company: PropTypes.string
+  name: PropTypes.string,
+  creditLine: PropTypes.number
 }
 
-function EditUser ({ refetch, userId, closeModal, firstName, lastName, dob, company }) {
+function EditCompany ({ refetch, companyId, closeModal, name, creditLine }) {
   const [submitLoading, setSubmitLoading] = useState(false)
   const [isDisabled, setIsDisabled] = useState(false)
   const [form] = Form.useForm()
-  const [editUser] = useMutation(EDIT_USER)
+  const [editCompany] = useMutation(EDIT_COMPANY)
 
   useEffect(() => {
     form.resetFields()
@@ -42,23 +42,23 @@ function EditUser ({ refetch, userId, closeModal, firstName, lastName, dob, comp
     setIsDisabled(true)
     setSubmitLoading(true)
 
-    var editFirstName = form.getFieldValue('firstName')
-    var editLastName = form.getFieldValue('lastName')
-    var editDOB = form.getFieldValue('dob').format('DD/MM/YYYY')
+    var editCreditLine = form.getFieldValue('creditLine')
+    var editName = form.getFieldValue('name')
 
-    if (editFirstName === undefined || editLastName === undefined || editDOB === undefined) {
+    if (editCreditLine === undefined || editName === undefined) {
       finishTransaction()
       return
     }
 
-    editUser(
+    editCreditLine = parseFloat(removeCommas(editCreditLine)) * 100
+
+    editCompany(
       {
         variables:
           {
-            id: userId,
-            firstName: editFirstName,
-            lastName: editLastName,
-            dob: editDOB
+            id: companyId,
+            name: editName,
+            credit_line: editCreditLine
           }
       }
     ).then(() => {
@@ -70,21 +70,18 @@ function EditUser ({ refetch, userId, closeModal, firstName, lastName, dob, comp
 
   return (
     <Form form={form}>
-      <Form.Item initialValue={firstName} name='firstName' rules={[{ required: true, message: 'Please enter a first name' }]}>
-        <Input id='edit-firstName' placeholder='First Name' />
+      <Form.Item initialValue={name} name='name' rules={[{ required: true, message: 'Please enter a name' }]}>
+        <Input id='edit-name' placeholder='Name' />
       </Form.Item>
-      <Form.Item initialValue={lastName} name='lastName' rules={[{ required: true, message: 'Please enter a last name' }]}>
-        <Input id='edit-lastName' placeholder='Last Name' />
-      </Form.Item>
-      <Form.Item initialValue={dob} name='dob' rules={[{ required: true, message: 'Please enter a date of birth' }]}>
-        <DatePicker css={fullWidthStyle} placeholder='Select a DOB' />
+      <Form.Item initialValue={creditLine} name='creditLine' rules={[{ required: true, message: 'Please enter an amount' }]}>
+        <NumInput id='edit-credit-line' placeholder='Credit Amount' />
       </Form.Item>
       <Form.Item>
         <Button
           css={submitButtonStyle}
           disabled={isDisabled}
           htmlType='submit'
-          id='edit-user-submit'
+          id='edit-merchant-submit'
           loading={submitLoading}
           onClick={handleSubmit}
           type='primary'>
@@ -93,7 +90,7 @@ function EditUser ({ refetch, userId, closeModal, firstName, lastName, dob, comp
         <Button
           danger
           disabled={isDisabled}
-          id='edit-user-cancel'
+          id='edit-merchant-cancel'
           onClick={() => handleClear(true)}>
                     Cancel
         </Button>
@@ -102,7 +99,7 @@ function EditUser ({ refetch, userId, closeModal, firstName, lastName, dob, comp
   )
 }
 
-export default EditUser
+export default EditCompany
 
 const submitButtonStyle = css`
   margin-right: 2%;
@@ -116,7 +113,4 @@ const submitButtonStyle = css`
     border-color: #a5ed93;
     color: #a5ed93;
   }
-`
-const fullWidthStyle = css`
-  width: 100%;
 `

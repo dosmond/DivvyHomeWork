@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { css } from '@emotion/core'
 import { Form, Input, Button } from 'antd'
 import { useMutation } from '@apollo/react-hooks'
-import { EDIT_MERCHANT } from '../mutations/merchant_mutations'
+import { EDIT_MERCHANT } from '../../mutations/merchant_mutations'
 import PropTypes from 'prop-types'
 
 EditMerchant.propTypes = {

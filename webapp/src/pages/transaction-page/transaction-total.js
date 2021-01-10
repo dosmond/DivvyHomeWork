@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { css } from '@emotion/core'
 import { Space, Card } from 'antd'
 import PropTypes from 'prop-types'
-import { toRomanNumerals } from '../common/common'
+import { toRomanNumerals } from '../../common/common'
 
 TransactionTotal.propTypes = {
   transactions: PropTypes.array,

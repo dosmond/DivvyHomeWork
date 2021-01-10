@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { css } from '@emotion/core'
 import { Space, Card, Form, Input, Button, DatePicker, Select } from 'antd'
 import { useQuery, useMutation } from '@apollo/react-hooks'
-import { CREATE_USER } from '../mutations/user_mutations'
-import { GET_COMPANIES } from '../queries/queries'
+import { CREATE_USER } from '../../mutations/user_mutations'
+import { GET_COMPANIES } from '../../queries/queries'
 import PropTypes from 'prop-types'
 
 const { Option } = Select

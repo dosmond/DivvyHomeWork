@@ -15,6 +15,7 @@ UsersTable.propTypes = {
 
 function UsersTable ({ users, refetch }) {
   users.forEach(item => {
+    item['companyName'] = item.company.name
     let options = { year: 'numeric', month: 'short', day: 'numeric' }
     let [date] = new Date(item.insertedAt).toLocaleDateString('en-US', options).split('/')
     item['date'] = `${date}`
@@ -45,6 +46,7 @@ function UsersTable ({ users, refetch }) {
         <Column dataIndex='firstName' key='firstName' sorter={(a, b) => a.firstName.toLowerCase().localeCompare(b.firstName.toLowerCase())} title='First Name' />
         <Column dataIndex='lastName' key='lastName' sorter={(a, b) => a.lastName.toLowerCase().localeCompare(b.lastName.toLowerCase())} title='Last Name' />
         <Column dataIndex='dob' key='dob' sorter={(a, b) => moment(a.dob).isBefore(moment(b.dob))} title='Date of Birth' />
+        <Column dataIndex='companyName' key='company' sorter={(a, b) => a.company.name.toLowerCase().localeCompare(b.company.name.toLowerCase())} title='Company' />
         <Column dataIndex='date' key='date' sorter={(a, b) => moment(a.date).isBefore(b.date)} title='Date Created' />
         <Column
           key='action'

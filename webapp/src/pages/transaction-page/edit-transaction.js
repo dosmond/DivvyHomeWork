@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { css } from '@emotion/core'
 import { Form, Input, Radio, Button, Select } from 'antd'
-import NumInput from '../components/number-input'
+import NumInput from '../../components/number-input'
 import { useMutation, useQuery } from '@apollo/react-hooks'
-import { EDIT_TRANSACTION } from '../mutations/transaction_mutations'
-import { GET_MERCHANTS_AND_USERS } from '../queries/queries'
-import { removeCommas } from '../common/common'
+import { EDIT_TRANSACTION } from '../../mutations/transaction_mutations'
+import { GET_MERCHANTS_AND_USERS } from '../../queries/queries'
+import { removeCommas } from '../../common/common'
 import PropTypes from 'prop-types'
 const { Option } = Select
 

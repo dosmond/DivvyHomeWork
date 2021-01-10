@@ -1,18 +1,16 @@
 import gql from 'graphql-tag'
 
 export const CREATE_COMPANY = gql`
-  mutation CreateCompany($name: String!, $description: String!) {
-    createCompany(name: $name, description: $description){
+  mutation CreateCompany($name: String!, $available_credit: Integer!, $credit_line: Integer!) {
+    createCompany(name: $name, available_credit: $available_credit, credit_line: $credit_line){
       id
-      name
-      description
     }
   }
 `
 
 export const EDIT_COMPANY = gql`
-  mutation EditCompany($id: ID!, $name: String!, $description: String!) {
-    updateCompany(id: $id, name: $name, description: $description){
+  mutation EditCompany($id: ID!, $name: String!, $available_credit: Integer!, $credit_line: Integer!) {
+    updateCompany(id: $id, name: $name, available_credit: $available_credit, credit_line: $credit_line){
       id
       name
       description

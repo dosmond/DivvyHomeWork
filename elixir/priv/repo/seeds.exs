@@ -124,6 +124,7 @@ Enum.each(users, fn(user) ->
     id: user.id,
     first_name: user.first_name,
     last_name: user.last_name,
+    company_id: user.company_id,
     dob: user.dob
   }
 end)

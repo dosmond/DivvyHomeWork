@@ -3,7 +3,7 @@ import { css } from '@emotion/core'
 import { Space, Col, Row, Card } from 'antd'
 import AddMerchant from './add-merchant'
 import { useQuery } from '@apollo/react-hooks'
-import { GET_MERCHANTS } from '../queries/queries'
+import { GET_MERCHANTS } from '../../queries/queries'
 import MerchantsTable from './merchants-table'
 
 export function Merchants () {

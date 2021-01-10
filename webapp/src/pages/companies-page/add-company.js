@@ -2,18 +2,19 @@ import React, { useState } from 'react'
 import { css } from '@emotion/core'
 import { Space, Card, Form, Input, Button } from 'antd'
 import { useMutation } from '@apollo/react-hooks'
-import { CREATE_MERCHANT } from '../mutations/merchant_mutations'
+import { CREATE_COMPANY } from '../../mutations/company_mutations'
 import PropTypes from 'prop-types'
+import NumInput from '../../components/number-input'
 
-AddMerchant.propTypes = {
+AddCompany.propTypes = {
   refetch: PropTypes.func
 }
 
-function AddMerchant ({ refetch }) {
+function AddCompany ({ refetch }) {
   const [submitLoading, setSubmitLoading] = useState(false)
   const [isDisabled, setIsDisabled] = useState(false)
   const [form] = Form.useForm()
-  const [createMerchant] = useMutation(CREATE_MERCHANT)
+  const [createCompany] = useMutation(CREATE_COMPANY)
 
   const handleClear = () => {
     form.resetFields()
@@ -29,20 +30,21 @@ function AddMerchant ({ refetch }) {
     setIsDisabled(true)
     setSubmitLoading(true)
 
-    var addDescription = form.getFieldValue('description')
+    var addCreditLine = form.getFieldValue('creditLine')
     var addName = form.getFieldValue('name')
 
-    if (addDescription === undefined || addName === undefined) {
+    if (addCreditLine === undefined || addName === undefined) {
       finishTransaction()
       return
     }
 
-    createMerchant(
+    createCompany(
       {
         variables:
         {
           name: addName,
-          description: addDescription
+          available_credit: addCreditLine,
+          credit_line: addCreditLine
         }
       }
     ).then(() => {
@@ -53,20 +55,20 @@ function AddMerchant ({ refetch }) {
 
   return (
     <Space css={addTransactionStyle} direction='vertical'>
-      <Card title='Add Merchant'>
+      <Card title='Add Company'>
         <Form form={form}>
           <Form.Item name='name' rules={[{ required: true, message: 'Please enter a name' }]}>
             <Input id='add-name' placeholder='Name' />
           </Form.Item>
-          <Form.Item name='description' rules={[{ required: true, message: 'Please enter a description' }]}>
-            <Input id='add-description' placeholder='Description' />
+          <Form.Item name='creditLine' rules={[{ required: true, message: 'Please enter an amount' }]}>
+            <NumInput id='add-credit-line' placeholder='Credit Amount' />
           </Form.Item>
           <Form.Item>
             <Button
               css={submitButtonStyle}
               disabled={isDisabled}
               htmlType='submit'
-              id='add-merchant-submit'
+              id='add-company-submit'
               loading={submitLoading}
               onClick={handleSubmit}
               type='primary'>
@@ -75,7 +77,7 @@ function AddMerchant ({ refetch }) {
             <Button
               danger
               disabled={isDisabled}
-              id='add-merchant-cancel'
+              id='add-company-cancel'
               onClick={() => handleClear(true)}>
                     Clear
             </Button>
@@ -86,7 +88,7 @@ function AddMerchant ({ refetch }) {
   )
 }
 
-export default AddMerchant
+export default AddCompany
 
 const addTransactionStyle = css`
   margin-top: 15px;

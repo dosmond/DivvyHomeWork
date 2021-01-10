@@ -1,11 +1,12 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import { css } from '@emotion/core'
-import { Overview } from './overview/overview-page'
+import { Overview } from './pages/overview/overview-page'
 import { Menu } from 'antd'
-import { Transactions } from './transaction-page/transactions-page'
-import { Merchants } from './merchants-page/merchants-page'
-import { Users } from './users-page/users-page'
+import { Transactions } from './pages//transaction-page/transactions-page'
+import { Merchants } from './pages/merchants-page/merchants-page'
+import { Users } from './pages/users-page/users-page'
+import { Companies } from './pages/companies-page/companies-page'
 
 function AppRouter () {
   return (
@@ -24,12 +25,16 @@ function AppRouter () {
           <Menu.Item key='users'>
             <Link to='/users'>Users</Link>
           </Menu.Item>
+          <Menu.Item key='companies'>
+            <Link to='/companies'>Companies</Link>
+          </Menu.Item>
         </Menu>
         <div className='main-content' css={contentStyle}>
           <Route component={Overview} exact path='/' />
           <Route component={Transactions} exact path='/transactions' />
           <Route component={Merchants} exact path='/merchants' />
           <Route component={Users} exact path='/users' />
+          <Route component={Companies} exact path='/companies' />
         </div>
       </Router>
     </div>
