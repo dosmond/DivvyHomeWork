@@ -17,6 +17,7 @@
     "globals": {
       "__DivvyEnvironment": true
     },
+    "testRegex": "(/__tests__/.*?(\\.|/)(tests?|spec))\\.jsx?$",
     "moduleDirectories": [
       "node_modules"
     ],
