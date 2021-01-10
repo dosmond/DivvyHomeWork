@@ -44,13 +44,13 @@ function CompaniesTable ({ companies, refetch }) {
         <Column
           key='credit_line'
           render={(text, record) => (
-            <label>${addCommas(record.credit_line / 100)}</label>
+            <label>${addCommas((record.credit_line / 100).toFixed(2))}</label>
           )}
           title='Credit Line' />
         <Column
           key='availableCredit'
           render={(text, record) => (
-            <label>${addCommas(record.available_credit / 100)}</label>
+            <label>${addCommas((record.available_credit / 100).toFixed(2))}</label>
           )}
           title='Available Credit' />
         <Column dataIndex='date' key='date' sorter={(a, b) => moment(a.date).isBefore(b.date)} title='Date Created' />

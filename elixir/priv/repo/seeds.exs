@@ -18,19 +18,19 @@ companies = [
   %{
     id: "b20a7ce9-684e-4ff4-86a4-dce38e123456",
     name: "Divvy",
-    available_credit: 10000000,
+    available_credit: 9999401,
     credit_line: 10000000
   },
   %{
     id: "b20a7ce9-684e-4ff4-86a4-dce38e123654",
     name: "Amazon",
-    available_credit: 10000000,
+    available_credit: 0,
     credit_line: 10000000
   },
   %{
     id: "b20a7ce9-684e-4ff4-86a4-dce38e123987",
     name: "Tesla",
-    available_credit: 10000000,
+    available_credit: 3010000,
     credit_line: 10000000
   },
 ]
