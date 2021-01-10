@@ -70,10 +70,10 @@ function EditUser ({ refetch, userId, closeModal, firstName, lastName, dob }) {
   return (
     <Form form={form}>
       <Form.Item initialValue={firstName} name='firstName' rules={[{ required: true, message: 'Please enter a first name' }]}>
-        <Input id='add-firstName' placeholder='First Name' />
+        <Input id='edit-firstName' placeholder='First Name' />
       </Form.Item>
       <Form.Item initialValue={lastName} name='lastName' rules={[{ required: true, message: 'Please enter a last name' }]}>
-        <Input id='add-lastName' placeholder='Last Name' />
+        <Input id='edit-lastName' placeholder='Last Name' />
       </Form.Item>
       <Form.Item initialValue={dob} name='dob' rules={[{ required: true, message: 'Please enter a date of birth' }]}>
         <DatePicker css={fullWidthStyle} placeholder='Select a DOB' />
@@ -83,7 +83,7 @@ function EditUser ({ refetch, userId, closeModal, firstName, lastName, dob }) {
           css={submitButtonStyle}
           disabled={isDisabled}
           htmlType='submit'
-          id='add-user-submit'
+          id='edit-user-submit'
           loading={submitLoading}
           onClick={handleSubmit}
           type='primary'>
@@ -92,7 +92,7 @@ function EditUser ({ refetch, userId, closeModal, firstName, lastName, dob }) {
         <Button
           danger
           disabled={isDisabled}
-          id='add-user-cancel'
+          id='edit-user-cancel'
           onClick={() => handleClear(true)}>
                     Cancel
         </Button>

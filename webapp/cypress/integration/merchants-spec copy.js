@@ -1,98 +1,52 @@
 /* eslint-disable no-undef */
-describe('Transactions page', () => {
+describe('Merchants page', () => {
   beforeEach(() => {
     cy.visit('localhost:3000/merchants')
-    cy.get('#delete-transactions').click()
     cy.wait(500)
   })
 
-  it('Should be able to edit a transaction', () => {
+  it('Should be able to edit a merchant', () => {
     let random = Math.random().toString(36).substring(7)
-    cy.get('#amount').clear().type('5.99')
-    cy.get('#merchant').clear().type('Walmart{enter}')
-    cy.get('#user').clear().type('Daniel Osmond{enter}')
-    cy.get('#description').clear().type(random)
-    cy.get('#radio-debit').click()
+    cy.get('#add-firstName').clear().type(random)
+    cy.get('#add-lastName').clear().type('tester')
+    cy.get('#dob').clear({ force: true }).type('2010-01-12{enter}')
 
-    cy.get('#add-transaction-submit').click()
+    cy.get('#add-user-submit').click()
 
     cy.wait(1000)
 
     cy.get('[data-cy="edit"]').last().click()
+    random = Math.random().toString(36).substring(7)
+    cy.get('#edit-firstName').clear().type(random)
 
-    cy.get('#edit-amount').clear().type('50.00')
-
-    cy.get('#edit-transaction-submit').click()
+    cy.get('#edit-user-submit').click()
 
     cy.wait(1000)
 
-    cy.get('table').should('contain.text', '50.00')
+    cy.get('table').should('contain.text', random)
   })
 
-  it('Should be able to delete a transaction', () => {
-    let random = Math.random().toString(36).substring(7)
-    cy.get('#amount').clear().type('5.99')
-    cy.get('#merchant').clear().type('Walmart{enter}')
-    cy.get('#user').clear().type('Daniel Osmond{enter}')
-    cy.get('#description').clear().type(random)
-    cy.get('#radio-debit').click()
-
-    cy.get('#add-transaction-submit').click()
-
-    cy.wait(1000)
-
-    cy.get('[data-cy="delete"]').last().click()
-    cy.get('#delete-transaction-submit').click()
-
-    cy.wait(1000)
-
-    cy.get('table').should('not.contain.text', random)
-  })
-
-  it('Should show roman numerals when switch is flipped', () => {
-    let random = Math.random().toString(36).substring(7)
-    cy.get('#amount').clear().type('5.99')
-    cy.get('#merchant').clear().type('Walmart{enter}')
-    cy.get('#user').clear().type('Daniel Osmond{enter}')
-    cy.get('#description').clear().type(random)
-    cy.get('#radio-debit').click()
-
-    cy.get('#add-transaction-submit').click()
-
-    cy.wait(1000)
-
-    cy.get('#roman-switch').click()
-
-    cy.wait(500)
-
-    cy.get('table').should('contain.text', '\u2164\u2160')
-  })
-
-  describe('Add Transaction component', () => {
+  describe('Add User component', () => {
     it('should clear fields on clicking cancel', () => {
-      cy.get('#amount').clear().type('123123')
-      cy.get('#merchant').clear().type('Walmart{enter}')
-      cy.get('#user').clear().type('Daniel Osmond{enter}')
-      cy.get('#description').clear().type('test')
-      cy.get('#radio-debit').click()
+      let random = Math.random().toString(36).substring(7)
+      cy.get('#add-firstName').clear().type(random)
+      cy.get('#add-lastName').clear().type('tester')
+      cy.get('#dob').clear({ force: true }).type('2010-01-12{enter}')
 
-      cy.get('#add-transaction-cancel').click()
+      cy.get('#add-user-cancel').click()
 
-      cy.get('#amount').should('have.value', '')
-      cy.get('#merchant').should('have.value', '')
-      cy.get('#description').should('have.value', '')
-      cy.get('#radio-debit').should('not.be.checked', '')
+      cy.get('#add-firstName').should('have.value', '')
+      cy.get('#add-lastName').should('have.value', '')
+      cy.get('#dob').should('have.value', '')
     })
 
-    it('Should be able to add a transacton', () => {
+    it('Should be able to add a merchant', () => {
       let random = Math.random().toString(36).substring(7)
-      cy.get('#amount').clear().type('5.99')
-      cy.get('#merchant').clear().type('Walmart{enter}')
-      cy.get('#user').clear().type('Daniel Osmond{enter}')
-      cy.get('#description').clear().type(random)
-      cy.get('#radio-debit').click()
+      cy.get('#add-firstName').clear().type(random)
+      cy.get('#add-lastName').clear().type('tester')
+      cy.get('#dob').clear({ force: true }).type('2010-01-12{enter}')
 
-      cy.get('#add-transaction-submit').click()
+      cy.get('#add-user-submit').click()
 
       cy.wait(1000)
       cy.get('table').should('contain.text', random)

@@ -18,7 +18,7 @@ defmodule Homework.Merchants do
 
   """
   def list_merchants(_args) do
-    Repo.all(Merchant)
+    Repo.all(from(t in Merchant, order_by: [desc: t.inserted_at]))
   end
 
   @doc """

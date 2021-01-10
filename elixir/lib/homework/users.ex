@@ -18,7 +18,7 @@ defmodule Homework.Users do
 
   """
   def list_users(_args) do
-    Repo.all(User)
+    Repo.all(from(t in User, order_by: [desc: t.inserted_at]))
   end
 
   @doc """

@@ -18,7 +18,7 @@ defmodule Homework.Transactions do
 
   """
   def list_transactions(_args) do
-    Repo.all(Transaction)
+    Repo.all(from(t in Transaction, order_by: [desc: t.inserted_at]))
   end
 
   @doc """
