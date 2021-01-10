@@ -85,7 +85,7 @@ function EditCompany ({ refetch, companyId, closeModal, name, creditLine, availa
           css={submitButtonStyle}
           disabled={isDisabled}
           htmlType='submit'
-          id='edit-merchant-submit'
+          id='edit-company-submit'
           loading={submitLoading}
           onClick={handleSubmit}
           type='primary'>
@@ -94,7 +94,7 @@ function EditCompany ({ refetch, companyId, closeModal, name, creditLine, availa
         <Button
           danger
           disabled={isDisabled}
-          id='edit-merchant-cancel'
+          id='edit-company-cancel'
           onClick={() => handleClear(true)}>
                     Cancel
         </Button>
