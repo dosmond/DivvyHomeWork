@@ -1,5 +1,9 @@
 # Homework
 
+This contains the backend server for the Divvy Homework project. 
+
+## To Setup
+
 You will need to have postgres running.
 The easiest way to install postgres is through brew:
 `brew install postgres`

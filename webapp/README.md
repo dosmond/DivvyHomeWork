@@ -1,21 +1,19 @@
 # Divvy React App
 
-Here is the completed boilerplate for a basic React application, with [Babel](https://babeljs.io/), [eslint](https://eslint.org/), [React](https://reactjs.org/), [React Router](https://github.com/ReactTraining/react-router), [Apollo Client (GraphQL)](https://www.apollographql.com/), and [emotion-js](https://github.com/emotion-js/emotion) already configured.  Please fork this project when submitting your homework assignment.
-
+This is the completed React app for the Divvy Homework. This app allows you add, edit, and delete transactions and also add and edit users and merchants. The Overview page will give you a small view of the transaction statistics via a few charts.
 
 ## Setup
 
     yarn
 
-
 ## To Run
 
     yarn start
 
+## To Run Cypress
 
-A webpack dev server is already configured, with hot reloading.  You should have everything you need to get started at this point.
+    yarn cypress
 
+## To Run Jest tests
 
-## What to do
-
-Please refer to the main [README](../README.md) in the root of this project.
+    yarn test
