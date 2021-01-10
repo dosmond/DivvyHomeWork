@@ -2,7 +2,6 @@
 describe('Users page', () => {
   beforeEach(() => {
     cy.visit('localhost:3000/users')
-    cy.wait(500)
   })
 
   it('Should be able to edit a user', () => {

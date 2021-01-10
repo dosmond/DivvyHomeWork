@@ -77,7 +77,7 @@ function EditMerchant ({ refetch, merchantId, closeModal, name, description }) {
           css={submitButtonStyle}
           disabled={isDisabled}
           htmlType='submit'
-          id='edit-transaction-submit'
+          id='edit-merchant-submit'
           loading={submitLoading}
           onClick={handleSubmit}
           type='primary'>
@@ -86,7 +86,7 @@ function EditMerchant ({ refetch, merchantId, closeModal, name, description }) {
         <Button
           danger
           disabled={isDisabled}
-          id='edit-transaction-cancel'
+          id='edit-merchant-cancel'
           onClick={() => handleClear(true)}>
                     Cancel
         </Button>

@@ -2,53 +2,49 @@
 describe('Merchants page', () => {
   beforeEach(() => {
     cy.visit('localhost:3000/merchants')
-    cy.wait(500)
   })
 
   it('Should be able to edit a merchant', () => {
     let random = Math.random().toString(36).substring(7)
-    cy.get('#add-firstName').clear().type(random)
-    cy.get('#add-lastName').clear().type('tester')
-    cy.get('#dob').clear({ force: true }).type('2010-01-12{enter}')
+    cy.get('#add-name').clear().type(random)
+    cy.get('#add-description').clear().type('tester')
 
-    cy.get('#add-user-submit').click()
+    cy.get('#add-merchant-submit').click()
 
     cy.wait(1000)
 
     cy.get('[data-cy="edit"]').last().click()
     random = Math.random().toString(36).substring(7)
-    cy.get('#edit-firstName').clear().type(random)
+    cy.get('#edit-name').clear().type(random)
 
-    cy.get('#edit-user-submit').click()
+    cy.get('#edit-merchant-submit').click()
 
     cy.wait(1000)
 
     cy.get('table').should('contain.text', random)
   })
 
-  describe('Add User component', () => {
+  describe('Add Merchant component', () => {
     it('should clear fields on clicking cancel', () => {
       let random = Math.random().toString(36).substring(7)
-      cy.get('#add-firstName').clear().type(random)
-      cy.get('#add-lastName').clear().type('tester')
-      cy.get('#dob').clear({ force: true }).type('2010-01-12{enter}')
+      cy.get('#add-name').clear().type(random)
+      cy.get('#add-description').clear().type('tester')
 
-      cy.get('#add-user-cancel').click()
+      cy.get('#add-merchant-cancel').click()
 
-      cy.get('#add-firstName').should('have.value', '')
-      cy.get('#add-lastName').should('have.value', '')
-      cy.get('#dob').should('have.value', '')
+      cy.get('#add-name').should('have.value', '')
+      cy.get('#add-description').should('have.value', '')
     })
 
     it('Should be able to add a merchant', () => {
       let random = Math.random().toString(36).substring(7)
-      cy.get('#add-firstName').clear().type(random)
-      cy.get('#add-lastName').clear().type('tester')
-      cy.get('#dob').clear({ force: true }).type('2010-01-12{enter}')
+      cy.get('#add-name').clear().type(random)
+      cy.get('#add-description').clear().type('tester')
 
-      cy.get('#add-user-submit').click()
+      cy.get('#add-merchant-submit').click()
 
       cy.wait(1000)
+
       cy.get('table').should('contain.text', random)
     })
   })
