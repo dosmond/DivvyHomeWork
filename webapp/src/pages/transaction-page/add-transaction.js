@@ -4,6 +4,7 @@ import { Space, Card, Form, Input, Radio, Button, Select } from 'antd'
 import NumInput from '../../components/number-input'
 import { useMutation, useQuery } from '@apollo/react-hooks'
 import { CREATE_TRANSACTION } from '../../mutations/transaction_mutations'
+import { EDIT_COMPANY } from '../../mutations/company_mutations'
 import { GET_MERCHANTS_AND_USERS } from '../../queries/queries'
 import { removeCommas } from '../../common/common'
 import PropTypes from 'prop-types'
@@ -19,6 +20,7 @@ function AddTransaction ({ refetch }) {
   const [isDisabled, setIsDisabled] = useState(false)
   const [form] = Form.useForm()
   const [createTransaction] = useMutation(CREATE_TRANSACTION)
+  const [updateCompany] = useMutation(EDIT_COMPANY)
   const { loading, error, data } = useQuery(GET_MERCHANTS_AND_USERS)
 
   if (loading) return 'Loading...'
@@ -69,8 +71,22 @@ function AddTransaction ({ refetch }) {
         }
       }
     ).then(() => {
-      refetch()
-      finishTransaction()
+      let company = data.users.filter((user) => user.id === addUser)[0].company
+
+      updateCompany(
+        {
+          variables:
+          {
+            id: company.id,
+            name: company.name,
+            credit_line: company.credit_line,
+            available_credit: company.available_credit + addAmount
+          }
+        }
+      ).then(() => {
+        refetch()
+        finishTransaction()
+      })
     })
   }
 

@@ -39,6 +39,11 @@ export function addCommas (input) {
 
 export function toRomanNumerals (num) {
   let isNegative = false
+
+  if (num === 0) {
+    return '0'
+  }
+
   if (num < 0) {
     isNegative = true
     num = Math.abs(num)

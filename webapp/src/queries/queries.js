@@ -18,6 +18,12 @@ export const GET_TRANSACTIONS = gql`
           id
           firstName
           lastName
+          company {
+            id
+            name
+            available_credit
+            credit_line
+          }
         }
       }
     }
@@ -75,7 +81,10 @@ export const GET_MERCHANTS_AND_USERS = gql`
         firstName
         lastName
         company {
+          id
           name
+          available_credit
+          credit_line
         }
     }
   }

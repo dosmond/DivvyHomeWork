@@ -7,6 +7,7 @@ import { EDIT_TRANSACTION } from '../../mutations/transaction_mutations'
 import { GET_MERCHANTS_AND_USERS } from '../../queries/queries'
 import { removeCommas } from '../../common/common'
 import PropTypes from 'prop-types'
+import { EDIT_COMPANY } from '../../mutations/company_mutations'
 const { Option } = Select
 
 EditTransaction.propTypes = {
@@ -26,6 +27,7 @@ function EditTransaction ({ refetch, transactionId, closeModal, amount, descript
   const [isDisabled, setIsDisabled] = useState(false)
   const [form] = Form.useForm()
   const [editTransaction] = useMutation(EDIT_TRANSACTION)
+  const [updateCompany] = useMutation(EDIT_COMPANY)
   const { loading, error, data } = useQuery(GET_MERCHANTS_AND_USERS)
 
   useEffect(() => {
@@ -84,9 +86,23 @@ function EditTransaction ({ refetch, transactionId, closeModal, amount, descript
           }
       }
     ).then(() => {
-      refetch()
-      finishTransaction()
-      closeModal()
+      let company = data.users.filter((user) => user.id === addUser)[0].company
+
+      updateCompany(
+        {
+          variables:
+          {
+            id: company.id,
+            name: company.name,
+            credit_line: company.credit_line,
+            available_credit: company.available_credit - ((amount * 100) - addAmount)
+          }
+        }
+      ).then(() => {
+        refetch()
+        finishTransaction()
+        closeModal()
+      })
     })
   }
 
