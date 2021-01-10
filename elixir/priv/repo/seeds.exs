@@ -12,6 +12,7 @@
 alias Homework.Transactions.Transaction
 alias Homework.Users.User
 alias Homework.Merchants.Merchant
+alias Homework.Companies.Company
 
 companies = [
   %{
@@ -108,6 +109,15 @@ transactions = [
     user_id: "b20a7ce9-684e-4ff4-86a4-dce38efa1236"
   }
 ]
+
+Enum.each(companies, fn(company) ->
+  Homework.Repo.insert! %Company{
+    id: company.id,
+    credit_line: company.credit_line,
+    available_credit: company.available_credit,
+    name: company.name
+  }
+end)
 
 Enum.each(users, fn(user) ->
   Homework.Repo.insert! %User{
