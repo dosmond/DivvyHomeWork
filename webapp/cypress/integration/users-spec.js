@@ -8,6 +8,7 @@ describe('Users page', () => {
     let random = Math.random().toString(36).substring(7)
     cy.get('#add-firstName').clear().type(random)
     cy.get('#add-lastName').clear().type('tester')
+    cy.get('#company').clear({ force: true }).type('Tesla{enter}')
     cy.get('#dob').clear({ force: true }).type('2010-01-12{enter}')
 
     cy.get('#add-user-submit').click()
@@ -30,6 +31,7 @@ describe('Users page', () => {
       let random = Math.random().toString(36).substring(7)
       cy.get('#add-firstName').clear().type(random)
       cy.get('#add-lastName').clear().type('tester')
+      cy.get('#company').clear({ force: true }).type('Tesla{enter}')
       cy.get('#dob').clear({ force: true }).type('2010-01-12{enter}')
 
       cy.get('#add-user-cancel').click()
@@ -43,6 +45,7 @@ describe('Users page', () => {
       let random = Math.random().toString(36).substring(7)
       cy.get('#add-firstName').clear().type(random)
       cy.get('#add-lastName').clear().type('tester')
+      cy.get('#company').clear({ force: true }).type('Tesla{enter}')
       cy.get('#dob').clear({ force: true }).type('2010-01-12{enter}')
 
       cy.get('#add-user-submit').click()

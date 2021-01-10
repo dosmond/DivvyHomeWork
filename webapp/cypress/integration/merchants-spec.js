@@ -13,7 +13,7 @@ describe('Merchants page', () => {
 
     cy.wait(1000)
 
-    cy.get('[data-cy="edit"]').last().click()
+    cy.get('[data-cy="edit"]').first().click()
     random = Math.random().toString(36).substring(7)
     cy.get('#edit-name').clear().type(random)
 

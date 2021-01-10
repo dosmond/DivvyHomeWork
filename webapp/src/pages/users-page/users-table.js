@@ -26,12 +26,14 @@ function UsersTable ({ users, refetch }) {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [dob, setDOB] = useState(moment())
+  const [companyId, setCompanyId] = useState('')
 
   const showEditModal = (record) => {
     setVisible(true)
     setUserId(record.id)
     setFirstName(record.firstName)
     setLastName(record.lastName)
+    setCompanyId(record.company.id)
     let dob = moment(record.dob)
     setDOB(dob)
   }
@@ -66,6 +68,7 @@ function UsersTable ({ users, refetch }) {
       >
         <EditUser
           closeModal={handleCancel}
+          companyId={companyId}
           dob={dob}
           firstName={firstName}
           lastName={lastName}

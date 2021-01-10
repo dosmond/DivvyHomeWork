@@ -11,10 +11,11 @@ EditUser.propTypes = {
   closeModal: PropTypes.func,
   firstName: PropTypes.string,
   lastName: PropTypes.string,
-  dob: PropTypes.object
+  dob: PropTypes.object,
+  companyId: PropTypes.string
 }
 
-function EditUser ({ refetch, userId, closeModal, firstName, lastName, dob }) {
+function EditUser ({ refetch, userId, closeModal, firstName, lastName, dob, companyId }) {
   const [submitLoading, setSubmitLoading] = useState(false)
   const [isDisabled, setIsDisabled] = useState(false)
   const [form] = Form.useForm()
@@ -57,6 +58,7 @@ function EditUser ({ refetch, userId, closeModal, firstName, lastName, dob }) {
             id: userId,
             firstName: editFirstName,
             lastName: editLastName,
+            company_id: companyId,
             dob: editDOB
           }
       }
