@@ -16,7 +16,7 @@ describe('Transactions page', () => {
 
     cy.wait(1000)
 
-    cy.get('[data-cy="edit"]').last().click()
+    cy.get('[data-cy="edit"]').first().click()
 
     cy.get('#edit-amount').clear().type('50.00')
 
@@ -39,7 +39,7 @@ describe('Transactions page', () => {
 
     cy.wait(1000)
 
-    cy.get('[data-cy="delete"]').last().click()
+    cy.get('[data-cy="delete"]').first().click()
     cy.get('#delete-transaction-submit').click()
 
     cy.wait(1000)

@@ -46,6 +46,18 @@ export const GET_USERS = gql`
   }
 `
 
+export const GET_COMPANIES = gql`
+  {
+    companies {
+        id
+        name
+        credit_line
+        available_credit
+        insertedAt
+    }
+  }
+`
+
 export const GET_MERCHANTS_AND_USERS = gql`
   {
     merchants {

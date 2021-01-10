@@ -11,7 +11,7 @@ TransactionTotal.propTypes = {
 
 function TransactionTotal ({ transactions, roman }) {
   const [balance, setBalance] = useState(0)
-  const [color, setColor] = useState('#ffffff')
+  const [color, setColor] = useState('#limegreen')
 
   useEffect(() => {
     if (transactions.length !== 0) {
@@ -35,7 +35,7 @@ function TransactionTotal ({ transactions, roman }) {
 
   return (
     <Space css={totalTransactionStyle} direction='vertical'>
-      <Card title='Balance'>
+      <Card title='Total'>
         <h1 style={{ color: color }}>${balance}</h1>
       </Card>
     </Space>

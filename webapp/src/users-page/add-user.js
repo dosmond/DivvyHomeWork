@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
 import { css } from '@emotion/core'
-import { Space, Card, Form, Input, Button, DatePicker } from 'antd'
-import { useMutation } from '@apollo/react-hooks'
+import { Space, Card, Form, Input, Button, DatePicker, Select } from 'antd'
+import { useQuery, useMutation } from '@apollo/react-hooks'
 import { CREATE_USER } from '../mutations/user_mutations'
+import { GET_COMPANIES } from '../queries/queries'
 import PropTypes from 'prop-types'
+
+const { Option } = Select
 
 AddUser.propTypes = {
   refetch: PropTypes.func
@@ -14,6 +17,11 @@ function AddUser ({ refetch }) {
   const [isDisabled, setIsDisabled] = useState(false)
   const [form] = Form.useForm()
   const [createUser] = useMutation(CREATE_USER)
+  const { loading, error, data } = useQuery(GET_COMPANIES)
+
+  if (loading) return 'Loading...'
+  if (error) return `Error! ${error.message}`
+  let companies = data.companies
 
   const handleClear = () => {
     form.resetFields()
@@ -32,8 +40,9 @@ function AddUser ({ refetch }) {
     var addFirstName = form.getFieldValue('firstName')
     var addLastName = form.getFieldValue('lastName')
     var addDOB = form.getFieldValue('dob').format('MM/DD/YYYY')
+    var addCompany = form.getFieldValue('company')
 
-    if (addFirstName === undefined || addLastName === undefined || addDOB === undefined) {
+    if (addFirstName === undefined || addLastName === undefined || addDOB === undefined || addCompany === undefined) {
       finishTransaction()
       return
     }
@@ -44,7 +53,8 @@ function AddUser ({ refetch }) {
         {
           firstName: addFirstName,
           lastName: addLastName,
-          dob: addDOB
+          dob: addDOB,
+          company_id: addCompany
         }
       }
     ).then(() => {
@@ -62,6 +72,17 @@ function AddUser ({ refetch }) {
           </Form.Item>
           <Form.Item name='lastName' rules={[{ required: true, message: 'Please enter a last name' }]}>
             <Input id='add-lastName' placeholder='Last Name' />
+          </Form.Item>
+          <Form.Item
+            name='company'
+            rules={[{ required: true, message: 'Please select a company' }]}>
+            <Select
+              optionFilterProp='children'
+              placeholder='Select a company'
+              showSearch
+            >
+              { companies && companies.map((company) => <Option key={company.id} value={company.id} >{company.name}</Option>)}
+            </Select>
           </Form.Item>
           <Form.Item name='dob' rules={[{ required: true, message: 'Please enter a date of birth' }]}>
             <DatePicker css={fullWidthStyle} placeholder='Select a DOB' />
