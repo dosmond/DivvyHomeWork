@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { css } from '@emotion/core'
 import { Space, Card, Form, Input, Button } from 'antd'
 import { useMutation } from '@apollo/react-hooks'
-import { CREATE_MERCHANT } from '../network/mutations'
+import { CREATE_MERCHANT } from '../mutations/merchant_mutations'
 import PropTypes from 'prop-types'
 
 AddMerchant.propTypes = {

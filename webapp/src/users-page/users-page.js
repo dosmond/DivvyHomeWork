@@ -3,7 +3,7 @@ import { css } from '@emotion/core'
 import { Space, Col, Row, Card } from 'antd'
 import AddUser from './add-user'
 import { useQuery } from '@apollo/react-hooks'
-import { GET_USERS } from '../network/queries'
+import { GET_USERS } from '../queries/queries'
 import UsersTable from './users-table'
 
 export function Users () {

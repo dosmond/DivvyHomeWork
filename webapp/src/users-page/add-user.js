@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { css } from '@emotion/core'
 import { Space, Card, Form, Input, Button, DatePicker } from 'antd'
 import { useMutation } from '@apollo/react-hooks'
-import { CREATE_USER } from '../network/mutations'
+import { CREATE_USER } from '../mutations/user_mutations'
 import PropTypes from 'prop-types'
 
 AddUser.propTypes = {

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { css } from '@emotion/core'
 import { Form, Input, Button, DatePicker } from 'antd'
 import { useMutation } from '@apollo/react-hooks'
-import { EDIT_USER } from '../network/mutations'
+import { EDIT_USER } from '../mutations/user_mutations'
 import PropTypes from 'prop-types'
 
 EditUser.propTypes = {

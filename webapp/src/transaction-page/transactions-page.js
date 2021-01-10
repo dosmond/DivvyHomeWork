@@ -3,7 +3,7 @@ import { css } from '@emotion/core'
 import { Space, Col, Row, Card, Switch } from 'antd'
 import AddTransaction from './add-transaction'
 import { useQuery } from '@apollo/react-hooks'
-import { GET_TRANSACTIONS } from '../network/queries'
+import { GET_TRANSACTIONS } from '../queries/queries'
 import TransactionTable from './transaction-table'
 import TransactionTotal from './transaction-total'
 
@@ -33,7 +33,7 @@ export function Transactions () {
           <AddTransaction refetch={refetch} />
         </Row>
         <Row>
-          <TransactionTotal transactions={transactions} />
+          <TransactionTotal roman={roman} transactions={transactions} />
         </Row>
       </Col>
     </Row>

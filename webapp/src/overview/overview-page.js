@@ -3,7 +3,7 @@ import { css } from '@emotion/core'
 import { useQuery } from '@apollo/react-hooks'
 import PieChart from '../components/pie-chart'
 import LineChart from '../components/line-chart'
-import { GET_TRANSACTIONS } from '../network/queries'
+import { GET_TRANSACTIONS } from '../queries/queries'
 import { Space, Card, Row, Col } from 'antd'
 
 export function Overview () {
