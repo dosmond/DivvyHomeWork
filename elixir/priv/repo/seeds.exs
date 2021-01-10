@@ -13,25 +13,49 @@ alias Homework.Transactions.Transaction
 alias Homework.Users.User
 alias Homework.Merchants.Merchant
 
+companies = [
+  %{
+    id: "b20a7ce9-684e-4ff4-86a4-dce38e123456",
+    name: "Divvy",
+    available_credit: 10000000,
+    credit_line: 10000000
+  },
+  %{
+    id: "b20a7ce9-684e-4ff4-86a4-dce38e123654",
+    name: "Amazon",
+    available_credit: 10000000,
+    credit_line: 10000000
+  },
+  %{
+    id: "b20a7ce9-684e-4ff4-86a4-dce38e123987",
+    name: "Tesla",
+    available_credit: 10000000,
+    credit_line: 10000000
+  },
+]
+
 
 users = [
   %{
     id: "b20a7ce9-684e-4ff4-86a4-dce38efa1234",
     first_name: "Daniel",
     last_name: "Osmond",
-    dob: "09/04/1996"
+    dob: "09/04/1996",
+    company_id: "b20a7ce9-684e-4ff4-86a4-dce38e123456"
   },
   %{
     id: "b20a7ce9-684e-4ff4-86a4-dce38efa1235",
     first_name: "Elon",
     last_name: "Musk",
-    dob: "06/28/1971"
+    dob: "06/28/1971",
+    company_id: "b20a7ce9-684e-4ff4-86a4-dce38e123987"
   },
   %{
     id: "b20a7ce9-684e-4ff4-86a4-dce38efa1236",
     first_name: "Jeff",
     last_name: "Bezos",
-    dob: "01/12/1964"
+    dob: "01/12/1964",
+    company_id: "b20a7ce9-684e-4ff4-86a4-dce38e123654"
   }
 ];
 
