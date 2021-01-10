@@ -5,17 +5,18 @@ import { useMutation } from '@apollo/react-hooks'
 import { EDIT_COMPANY } from '../../mutations/company_mutations'
 import PropTypes from 'prop-types'
 import NumInput from '../../components/number-input'
-import { removeCommas } from '../../common/common'
+import { addCommas, removeCommas } from '../../common/common'
 
 EditCompany.propTypes = {
   refetch: PropTypes.func,
   companyId: PropTypes.string,
   closeModal: PropTypes.func,
   name: PropTypes.string,
-  creditLine: PropTypes.number
+  creditLine: PropTypes.number,
+  availableCredit: PropTypes.number
 }
 
-function EditCompany ({ refetch, companyId, closeModal, name, creditLine }) {
+function EditCompany ({ refetch, companyId, closeModal, name, creditLine, availableCredit }) {
   const [submitLoading, setSubmitLoading] = useState(false)
   const [isDisabled, setIsDisabled] = useState(false)
   const [form] = Form.useForm()
@@ -52,13 +53,16 @@ function EditCompany ({ refetch, companyId, closeModal, name, creditLine }) {
 
     editCreditLine = parseFloat(removeCommas(editCreditLine)) * 100
 
+    let editAvailableCredit = availableCredit - (creditLine - editCreditLine)
+
     editCompany(
       {
         variables:
           {
             id: companyId,
             name: editName,
-            credit_line: editCreditLine
+            credit_line: editCreditLine,
+            available_credit: editAvailableCredit
           }
       }
     ).then(() => {
@@ -73,8 +77,8 @@ function EditCompany ({ refetch, companyId, closeModal, name, creditLine }) {
       <Form.Item initialValue={name} name='name' rules={[{ required: true, message: 'Please enter a name' }]}>
         <Input id='edit-name' placeholder='Name' />
       </Form.Item>
-      <Form.Item initialValue={creditLine} name='creditLine' rules={[{ required: true, message: 'Please enter an amount' }]}>
-        <NumInput id='edit-credit-line' placeholder='Credit Amount' />
+      <Form.Item initialValue={addCommas((creditLine / 100).toFixed(2).toString())} name='creditLine' rules={[{ required: true, message: 'Please enter an amount' }]}>
+        <NumInput id='edit-credit-line' initialValue={addCommas((creditLine / 100).toFixed(2).toString())} placeholder='Credit Amount' />
       </Form.Item>
       <Form.Item>
         <Button

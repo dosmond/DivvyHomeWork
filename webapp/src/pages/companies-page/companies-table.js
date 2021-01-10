@@ -4,8 +4,8 @@ import moment from 'moment'
 import { css } from '@emotion/core'
 import { Table, Space, Modal } from 'antd'
 import { EditTwoTone } from '@ant-design/icons'
-import EditMerchant from './edit-company'
 import { addCommas } from '../../common/common'
+import EditCompany from './edit-company'
 
 const { Column } = Table
 
@@ -24,13 +24,15 @@ function CompaniesTable ({ companies, refetch }) {
   const [visible, setVisible] = useState(false)
   const [companyId, setCompanyId] = useState('')
   const [name, setName] = useState('')
-  const [description, setDescription] = useState('')
+  const [creditLine, setCreditLine] = useState(0)
+  const [availableCredit, setAvailableCredit] = useState(0)
 
   const showEditModal = (record) => {
     setVisible(true)
     setCompanyId(record.id)
     setName(record.name)
-    setDescription(record.description)
+    setCreditLine(record.credit_line)
+    setAvailableCredit(record.available_credit)
   }
 
   const handleCancel = () => {
@@ -40,7 +42,7 @@ function CompaniesTable ({ companies, refetch }) {
   return (
     <>
       <Table dataSource={companies} rowKey={record => record.id}>
-        <Column dataIndex='name' key='Name' sorter={(a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase())} title='Merchant' />
+        <Column dataIndex='name' key='Name' sorter={(a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase())} title='Company' />
         <Column
           key='credit_line'
           render={(text, record) => (
@@ -50,7 +52,7 @@ function CompaniesTable ({ companies, refetch }) {
         <Column
           key='availableCredit'
           render={(text, record) => (
-            <label>${addCommas((record.available_credit / 100).toFixed(2))}</label>
+            <label style={{ color: record.available_credit > 0 ? 'limegreen' : 'red' }}>${addCommas((record.available_credit / 100).toFixed(2))}</label>
           )}
           title='Available Credit' />
         <Column dataIndex='date' key='date' sorter={(a, b) => moment(a.date).isBefore(b.date)} title='Date Created' />
@@ -70,10 +72,11 @@ function CompaniesTable ({ companies, refetch }) {
         title='Edit Company'
         visible={visible}
       >
-        <EditMerchant
+        <EditCompany
+          availableCredit={availableCredit}
           closeModal={handleCancel}
-          description={description}
-          merchantId={companyId}
+          companyId={companyId}
+          creditLine={creditLine}
           name={name}
           refetch={refetch}
         />

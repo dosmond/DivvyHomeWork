@@ -12,8 +12,6 @@ export const EDIT_COMPANY = gql`
   mutation EditCompany($id: ID!, $name: String!, $available_credit: Integer!, $credit_line: Integer!) {
     updateCompany(id: $id, name: $name, available_credit: $available_credit, credit_line: $credit_line){
       id
-      name
-      description
     }
   }
 `

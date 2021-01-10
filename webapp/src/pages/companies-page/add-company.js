@@ -5,6 +5,7 @@ import { useMutation } from '@apollo/react-hooks'
 import { CREATE_COMPANY } from '../../mutations/company_mutations'
 import PropTypes from 'prop-types'
 import NumInput from '../../components/number-input'
+import { removeCommas } from '../../common/common'
 
 AddCompany.propTypes = {
   refetch: PropTypes.func
@@ -37,6 +38,8 @@ function AddCompany ({ refetch }) {
       finishTransaction()
       return
     }
+
+    addCreditLine = parseFloat(removeCommas(addCreditLine)) * 100
 
     createCompany(
       {
