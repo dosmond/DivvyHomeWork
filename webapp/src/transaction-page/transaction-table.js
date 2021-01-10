@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
+import moment from 'moment'
 import { css } from '@emotion/core'
 import { Table, Space, Modal, Button } from 'antd'
 import { EditTwoTone, DeleteTwoTone } from '@ant-design/icons'
@@ -85,7 +86,7 @@ function TransactionTable ({ transactions, refetch, roman }) {
     <>
       <Table dataSource={transactions} rowKey={record => record.id}>
         <Column dataIndex='description' ellipsis key='description' title='Description' />
-        <Column dataIndex='date' key='date' sorter={(a, b) => a - b} title='Date' />
+        <Column dataIndex='date' key='date' sorter={(a, b) => moment(a.date).isBefore(b.date)} title='Date' />
         <Column dataIndex='userName' key='userName' sorter={(a, b) => a.userName.toLowerCase().localeCompare(b.userName.toLowerCase())} title='User' />
         <Column dataIndex='merchantName' key='merchant' sorter={(a, b) => a.merchantName.toLowerCase().localeCompare(b.merchantName.toLowerCase())} title='Merchant' />
         <Column
