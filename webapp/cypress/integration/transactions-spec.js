@@ -2,8 +2,6 @@
 describe('Transactions page', () => {
   beforeEach(() => {
     cy.visit('localhost:3000/transactions')
-    cy.get('#delete-transactions').click()
-    cy.wait(500)
   })
 
   it('Should be able to edit a transaction', () => {

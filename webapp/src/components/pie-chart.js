@@ -23,13 +23,13 @@ const PieChart = ({ data }) => {
           translateX: 0,
           translateY: 56,
           itemsSpacing: 0,
-          itemWidth: 80,
+          itemWidth: 70,
           itemHeight: 18,
           itemTextColor: '#999',
-          itemDirection: 'left-to-right',
+          itemDirection: 'bottom-to-top',
           itemOpacity: 1,
           symbolSize: 18,
-          symbolShape: 'circle',
+          symbolShape: 'square',
           effects: [
             {
               on: 'hover',
