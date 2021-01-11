@@ -9,7 +9,9 @@ The easiest way to install postgres is through brew:
 `brew install postgres`
 
 Expected username and password are:
+
     Username: postgres
+    
     Password: postgres
 
 To start your Phoenix server:
