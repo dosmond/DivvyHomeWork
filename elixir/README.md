@@ -11,7 +11,7 @@ The easiest way to install postgres is through brew:
 Expected username and password are:
 
     Username: postgres
-    
+
     Password: postgres
 
 To start your Phoenix server:
@@ -20,10 +20,9 @@ To start your Phoenix server:
   * Create and migrate your database with `mix ecto.setup`
   * Start Phoenix endpoint with `mix phx.server`
 
-Now you can visit [`localhost:8000`](http://localhost:8000) from your browser.
+Your server will be running @ [`localhost:8000`](http://localhost:8000).
 You can use [`localhost:8000/graphiql`](http://localhost:8000/graphiql) to make basic graphql queries from your browser.
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
 
 ## To Run Tests
 
