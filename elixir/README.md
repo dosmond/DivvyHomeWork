@@ -1,6 +1,6 @@
 # Homework
 
-This contains the backend server for the Divvy Homework project. 
+This contains the backend server for the Divvy Homework project. Running the setup script will also seed the database. There is a schema for Users, Merchants, Transactions, and Companies.
 
 ## To Setup
 
@@ -19,10 +19,6 @@ You can use [`localhost:8000/graphiql`](http://localhost:8000/graphiql) to make 
 
 Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
 
-## Learn more
+## To Run Tests
 
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+    mix test
